@@ -1,4 +1,4 @@
-from kakao import KakaoLocal
+from PyKakao import KakaoLocal
 from pprint import pprint
 from config import Config
 
