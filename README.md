@@ -2,9 +2,13 @@
 
 ![](https://img.shields.io/badge/python-3.8-blue.svg)
 ![](https://img.shields.io/badge/requests-2.27.1-red.svg)
+![](https://img.shields.io/badge/api-kakao-yellow.svg)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FWooilJeong%2FPyKakao&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 [![Linkedin Badge](https://img.shields.io/badge/-WooilJeong-blue?style=plastic&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/wooil/)](https://www.linkedin.com/in/wooil/) 
 
+## 소개
+
+PyKakao는 [kakao developers](https://developers.kakao.com/)에서 제공하는 [로컬(Local) API](https://developers.kakao.com/docs/latest/ko/local/common)를 이용할 수 있는 Python Client 입니다. PyKakao를 정상적으로 이용하기 위해서는 kakao developers 애플리케이션 추가를 통해 발급되는 REST API 키가 필요합니다.
 
 ## 설치
 
@@ -19,10 +23,10 @@ pip install PyKakao
 ```python
 from PyKakao import KakaoLocal
 
-# 카카오 로컬 API 인증키
-service_key = "카카오 API 인증키"
+# kakao developers에서 발급받은 REST API 키	
+service_key = "REST API 키"
 
-# 카카오 로컬 API 세션 정의
+# kakao local API 세션 정의
 KL = KakaoLocal(service_key)
 ```
 
