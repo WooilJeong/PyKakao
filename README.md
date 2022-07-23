@@ -5,6 +5,20 @@
 ![](https://img.shields.io/badge/requests-2.27.1-red.svg)
 ![](https://img.shields.io/badge/api-kakao-yellow.svg)
 
+## 기여자
+
+<div align="center">
+    <table>
+    <tr>
+        <td align="center">
+            <a href="https://github.com/wooiljeong">
+            <img src="https://avatars.githubusercontent.com/u/38076110?v=4" width="100px;" alt=""/><br />
+            <sub><b>정우일</b></sub></a><br />
+        </td>
+    </tr>
+    </table>
+</div>
+
 ## 소개
 
 PyKakao는 [kakao developers](https://developers.kakao.com/)에서 제공하는 [로컬(Local) API](https://developers.kakao.com/docs/latest/ko/local/common)를 이용할 수 있는 Python Client 입니다. PyKakao를 정상적으로 이용하기 위해서는 kakao developers 애플리케이션 추가를 통해 발급되는 REST API 키가 필요합니다.
