@@ -1,18 +1,19 @@
 import setuptools
+from PyKakao.config.info import __version__, __author__, __contact__, __github__
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="PyKakao",
-    version="0.0.1",
+    version=__version__,
     license='MIT',
-    author="Wooil Jeong",
-    author_email="wooil@kakao.com",
-    description="kakao api for python",
+    author=__author__,
+    author_email=__contact__,
+    description="Kakao Open API Python Wrapper",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/WooilJeong/PyKakao",
+    url=__github__,
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
