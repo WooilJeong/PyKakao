@@ -1,11 +1,11 @@
 import setuptools
-from PyKakao.config.info import __version__, __author__, __contact__, __github__
+from PyKakao.config.info import __project__, __version__, __author__, __contact__, __github__
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="PyKakao",
+    name=__project__,
     version=__version__,
     license='MIT',
     author=__author__,
