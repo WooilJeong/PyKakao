@@ -1,20 +1,19 @@
 import json
 import requests
-import logging
 
 
-## 카카오 로컬 API
+# 카카오 로컬 API
 class KakaoLocal:
-    """
+    """ 
     카카오 로컬 API 클래스
+
+    Parameters
+    ----------
+    service_key : string
+        카카오 개발자 센터에서 발급받은 애플리케이션 인증키
     """
 
-    def __init__(self, service_key, logger=None):
-
-        if logger is None:
-            self.logger = logging.getLogger("root")
-        else:
-            self.logger = logger
+    def __init__(self, service_key):
 
         self.service_key = service_key
         self.headers = {"Authorization": "KakaoAK {}".format(self.service_key)}
@@ -34,7 +33,7 @@ class KakaoLocal:
         self.URL_06 = "https://dapi.kakao.com/v2/local/search/category.json"
 
     def search_address(self, query, analyze_type=None, page=None, size=None):
-        """
+        """ 
         주소 검색하기
 
         Args:
@@ -61,10 +60,10 @@ class KakaoLocal:
         좌표로 행정구역정보 받기
 
         Args:
-            x (str): X 좌표값, 경위도인 경우 경도(longitude)
-            y (str): Y 좌표값, 경위도인 경우 위도(latitude)
-            input_coord (str): x, y 로 입력되는 값에 대한 좌표계. 지원 좌표계: WGS84, WCONGNAMUL, CONGNAMUL, WTM, TM (기본값: WGS84)
-            output_coord (str): 결과에 출력될 좌표계. 지원 좌표계: WGS84, WCONGNAMUL, CONGNAMUL, WTM, TM (기본값: WGS84)
+            x (str): X 좌표값, 경위도인 경우 경도(longitude)  
+            y (str): Y 좌표값, 경위도인 경우 위도(latitude)  
+            input_coord (str): x, y 로 입력되는 값에 대한 좌표계. 지원 좌표계: WGS84, WCONGNAMUL, CONGNAMUL, WTM, TM (기본값: WGS84)  
+            output_coord (str): 결과에 출력될 좌표계. 지원 좌표계: WGS84, WCONGNAMUL, CONGNAMUL, WTM, TM (기본값: WGS84)  
         """
         params = {"x": f"{x}", "y": f"{y}"}
 
