@@ -271,8 +271,8 @@ result
 
 ## 기여자
 
-<a href="https://github.com/wooiljeong/publicdatareader/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=wooiljeong/publicdatareader" />
+<a href="https://github.com/wooiljeong/pykakao/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=wooiljeong/pykakao" />
 </a>
 
 <br>
