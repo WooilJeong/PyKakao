@@ -1,7 +1,7 @@
 <div align="center">
 
 <b>카카오 데이터 조회를 위한 오픈소스 로우코드 파이썬 라이브러리</b><br>
-<b>🚀`pip install PyNaver --upgrade`</b>
+<b>🚀`pip install PyKakao --upgrade`</b>
 
 [![PyPI Latest Release](https://img.shields.io/pypi/v/pykakao.svg)](https://pypi.org/project/pykakao/)
 [![License](https://img.shields.io/pypi/l/ansicolortags.svg)](https://img.shields.io/pypi/l/ansicolortags.svg)
