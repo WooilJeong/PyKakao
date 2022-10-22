@@ -21,6 +21,9 @@ PyKakao는 [kakao developers](https://developers.kakao.com/)에서 제공하는 
 
 ## 설치 방법
 
+- Windows: CMD(명령 프롬프트)를 열어 아래 Shell 명령어를 입력
+- Mac: Terminal(터미널)을 열어 아래 Shell 명령어를 입력
+
 ```bash
 pip install PyKakao
 ```
