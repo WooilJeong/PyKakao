@@ -1,35 +1,33 @@
-# PyKakao
+<div align="center">
+
+<b>카카오 데이터 조회를 위한 오픈소스 로우코드 파이썬 라이브러리</b><br>
+<b>🚀`pip install PyNaver --upgrade`</b>
 
 [![PyPI Latest Release](https://img.shields.io/pypi/v/pykakao.svg)](https://pypi.org/project/pykakao/)
-![](https://img.shields.io/badge/python-3.8-blue.svg)
-![](https://img.shields.io/badge/requests-2.27.1-red.svg)
-![](https://img.shields.io/badge/api-kakao-yellow.svg)
+[![License](https://img.shields.io/pypi/l/ansicolortags.svg)](https://img.shields.io/pypi/l/ansicolortags.svg)
+[![Python](https://img.shields.io/badge/Official-Docs-tomato)](https://wooiljeong.github.io/PyKakao/)
+![](https://img.shields.io/badge/API-KAKAO-yellow.svg)  
+[![오픈채팅](https://img.shields.io/badge/오픈채팅-Q&A-yellow?logo=KakaoTalk)](https://open.kakao.com/o/gh1N1kJe)
 
-## 기여자
+<br>
 
-<div align="center">
-    <table>
-    <tr>
-        <td align="center">
-            <a href="https://github.com/wooiljeong">
-            <img src="https://avatars.githubusercontent.com/u/38076110?v=4" width="100px;" alt=""/><br />
-            <sub><b>정우일</b></sub></a><br />
-        </td>
-    </tr>
-    </table>
-</div>
+<div align="left">
 
-## 소개
+## PyKakao
 
 PyKakao는 [kakao developers](https://developers.kakao.com/)에서 제공하는 [로컬(Local) API](https://developers.kakao.com/docs/latest/ko/local/common)를 이용할 수 있는 Python Client 입니다. PyKakao를 정상적으로 이용하기 위해서는 kakao developers 애플리케이션 추가를 통해 발급되는 REST API 키가 필요합니다.
 
-## 설치
+<br>
+
+## 설치 방법
 
 ```bash
 pip install PyKakao
 ```
 
-## 예제
+<br>
+
+## 사용 방법
 
 ### 카카오 로컬 API 기능 불러오기
 
@@ -251,6 +249,28 @@ result
   'same_name': None,
   'total_count': 32}}
 ```
+
+<br>
+
+## 참고
+
+- **튜토리얼**  
+    - [(블로그) PyKakao - Python 카카오 API 클라이언트](https://wooiljeong.github.io/python/pykakao/)
+
+- **공식문서**
+  - [Docs](https://wooiljeong.github.io/PyKakao/)
+
+- **문의**  
+  - **이메일**: wooil@kakao.com  
+  - **카카오톡 오픈채팅방**: [접속 링크](https://open.kakao.com/o/gh1N1kJe)
+
+<br>
+
+## 기여자
+
+<a href="https://github.com/wooiljeong/publicdatareader/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=wooiljeong/publicdatareader" />
+</a>
 
 <br>
 
