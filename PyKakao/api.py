@@ -1,8 +1,128 @@
 import json
 import requests
+import pandas as pd
 
 
-# 카카오 로컬 API
+class KakaoDaumSearch:
+    """
+    카카오 다음 검색 API 클래스
+
+    Parameters
+    ----------
+    service_key : str
+        카카오 API 서비스 키
+    """
+
+    def __init__(self, service_key) -> None:
+
+        self.service_key = service_key
+        self.headers = {"Authorization": f"KakaoAK {self.service_key}"}
+        self.url_dict = {
+            "웹문서": "https://dapi.kakao.com/v2/search/web",
+            "동영상": "https://dapi.kakao.com/v2/search/vclip",
+            "이미지": "https://dapi.kakao.com/v2/search/image",
+            "블로그": "https://dapi.kakao.com/v2/search/blog",
+            "책": "https://dapi.kakao.com/v3/search/book",
+            "카페": "https://dapi.kakao.com/v2/search/cafe",
+        }
+
+    def search_web(self, **kwargs):
+
+        url = self.url_dict.get("웹문서")
+        response = requests.get(url, headers=self.headers, params=kwargs)
+
+        if kwargs.get("raw") == True:
+            return response.json()
+        else:
+            meta = response.json()['meta']
+            total_count = meta.get('total_count')
+            pageable_count = meta.get('pageable_count')
+            is_end = meta.get('is_end')
+            print(
+                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            return pd.DataFrame(response.json()["documents"])
+
+    def search_vclip(self, **kwargs):
+
+        url = self.url_dict.get("동영상")
+        response = requests.get(url, headers=self.headers, params=kwargs)
+
+        if kwargs.get("raw") == True:
+            return response.json()
+        else:
+            meta = response.json()['meta']
+            total_count = meta.get('total_count')
+            pageable_count = meta.get('pageable_count')
+            is_end = meta.get('is_end')
+            print(
+                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            return pd.DataFrame(response.json()["documents"])
+
+    def search_web(self, **kwargs):
+
+        url = self.url_dict.get("이미지")
+        response = requests.get(url, headers=self.headers, params=kwargs)
+
+        if kwargs.get("raw") == True:
+            return response.json()
+        else:
+            meta = response.json()['meta']
+            total_count = meta.get('total_count')
+            pageable_count = meta.get('pageable_count')
+            is_end = meta.get('is_end')
+            print(
+                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            return pd.DataFrame(response.json()["documents"])
+
+    def search_blog(self, **kwargs):
+
+        url = self.url_dict.get("블로그")
+        response = requests.get(url, headers=self.headers, params=kwargs)
+
+        if kwargs.get("raw") == True:
+            return response.json()
+        else:
+            meta = response.json()['meta']
+            total_count = meta.get('total_count')
+            pageable_count = meta.get('pageable_count')
+            is_end = meta.get('is_end')
+            print(
+                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            return pd.DataFrame(response.json()["documents"])
+
+    def search_book(self, **kwargs):
+
+        url = self.url_dict.get("책")
+        response = requests.get(url, headers=self.headers, params=kwargs)
+
+        if kwargs.get("raw") == True:
+            return response.json()
+        else:
+            meta = response.json()['meta']
+            total_count = meta.get('total_count')
+            pageable_count = meta.get('pageable_count')
+            is_end = meta.get('is_end')
+            print(
+                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            return pd.DataFrame(response.json()["documents"])
+
+    def search_cafe(self, **kwargs):
+
+        url = self.url_dict.get("카페")
+        response = requests.get(url, headers=self.headers, params=kwargs)
+
+        if kwargs.get("raw") == True:
+            return response.json()
+        else:
+            meta = response.json()['meta']
+            total_count = meta.get('total_count')
+            pageable_count = meta.get('pageable_count')
+            is_end = meta.get('is_end')
+            print(
+                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            return pd.DataFrame(response.json()["documents"])
+
+
 class KakaoLocal:
     """ 
     카카오 로컬 API 클래스
