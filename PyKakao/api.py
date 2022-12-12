@@ -13,8 +13,7 @@ class KakaoDaumSearch:
         카카오 API 서비스 키
     """
 
-    def __init__(self, service_key) -> None:
-
+    def __init__(self, service_key=None) -> None:
         self.service_key = service_key
         self.headers = {"Authorization": f"KakaoAK {self.service_key}"}
         self.url_dict = {
@@ -29,98 +28,182 @@ class KakaoDaumSearch:
     def search_web(self, **kwargs):
 
         url = self.url_dict.get("웹문서")
-        response = requests.get(url, headers=self.headers, params=kwargs)
 
-        if kwargs.get("raw") == True:
-            return response.json()
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {response.json()}")
+                return None
+
         else:
-            meta = response.json()['meta']
-            total_count = meta.get('total_count')
-            pageable_count = meta.get('pageable_count')
-            is_end = meta.get('is_end')
-            print(
-                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
-            return pd.DataFrame(response.json()["documents"])
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
+                return None
 
     def search_vclip(self, **kwargs):
 
         url = self.url_dict.get("동영상")
-        response = requests.get(url, headers=self.headers, params=kwargs)
 
-        if kwargs.get("raw") == True:
-            return response.json()
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {e}")
+                return None
+
         else:
-            meta = response.json()['meta']
-            total_count = meta.get('total_count')
-            pageable_count = meta.get('pageable_count')
-            is_end = meta.get('is_end')
-            print(
-                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
-            return pd.DataFrame(response.json()["documents"])
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
+                return None
 
-    def search_web(self, **kwargs):
+    def search_image(self, **kwargs):
 
         url = self.url_dict.get("이미지")
-        response = requests.get(url, headers=self.headers, params=kwargs)
 
-        if kwargs.get("raw") == True:
-            return response.json()
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {e}")
+                return None
+
         else:
-            meta = response.json()['meta']
-            total_count = meta.get('total_count')
-            pageable_count = meta.get('pageable_count')
-            is_end = meta.get('is_end')
-            print(
-                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
-            return pd.DataFrame(response.json()["documents"])
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
+                return None
 
     def search_blog(self, **kwargs):
 
         url = self.url_dict.get("블로그")
-        response = requests.get(url, headers=self.headers, params=kwargs)
 
-        if kwargs.get("raw") == True:
-            return response.json()
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {e}")
+                return None
+
         else:
-            meta = response.json()['meta']
-            total_count = meta.get('total_count')
-            pageable_count = meta.get('pageable_count')
-            is_end = meta.get('is_end')
-            print(
-                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
-            return pd.DataFrame(response.json()["documents"])
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
+                return None
 
     def search_book(self, **kwargs):
 
         url = self.url_dict.get("책")
-        response = requests.get(url, headers=self.headers, params=kwargs)
 
-        if kwargs.get("raw") == True:
-            return response.json()
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {e}")
+                return None
+
         else:
-            meta = response.json()['meta']
-            total_count = meta.get('total_count')
-            pageable_count = meta.get('pageable_count')
-            is_end = meta.get('is_end')
-            print(
-                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
-            return pd.DataFrame(response.json()["documents"])
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
+                return None
 
     def search_cafe(self, **kwargs):
 
         url = self.url_dict.get("카페")
-        response = requests.get(url, headers=self.headers, params=kwargs)
 
-        if kwargs.get("raw") == True:
-            return response.json()
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {e}")
+                return None
+
         else:
-            meta = response.json()['meta']
-            total_count = meta.get('total_count')
-            pageable_count = meta.get('pageable_count')
-            is_end = meta.get('is_end')
-            print(
-                f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
-            return pd.DataFrame(response.json()["documents"])
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
+                return None
 
 
 class KakaoLocal:
@@ -133,7 +216,7 @@ class KakaoLocal:
         카카오 개발자 센터에서 발급받은 애플리케이션 인증키
     """
 
-    def __init__(self, service_key):
+    def __init__(self, service_key=None):
 
         self.service_key = service_key
         self.headers = {"Authorization": "KakaoAK {}".format(self.service_key)}
