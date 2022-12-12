@@ -3,17 +3,47 @@ import requests
 import pandas as pd
 
 
-class KakaoDaumSearch:
+class KoGPT:
+    """
+    카카오 KoGPT API 클래스
+
+    Parameters
+    ----------
+    service_key : str
+        카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키
+    """
+
+    def __init__(self, service_key=None):
+        self.service_key = service_key
+        self.headers = {"Authorization": f"KakaoAK {self.service_key}",
+                        "Content-Type": "application/json"}
+        self.url = "https://api.kakaobrain.com/v1/inference/kogpt/generation"
+
+    def generate(self, prompt, max_tokens, **kwargs):
+        kwargs['prompt'], kwargs['max_tokens'] = prompt, max_tokens
+        try:
+            response = requests.post(self.url, headers=self.headers, json=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+        try:
+            return response.json()
+        except Exception as e:
+            print(f"Json Error - {e}")
+            return None
+
+
+class DaumSearch:
     """
     카카오 다음 검색 API 클래스
 
     Parameters
     ----------
     service_key : str
-        카카오 API 서비스 키
+        카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키
     """
 
-    def __init__(self, service_key=None) -> None:
+    def __init__(self, service_key=None):
         self.service_key = service_key
         self.headers = {"Authorization": f"KakaoAK {self.service_key}"}
         self.url_dict = {
@@ -25,16 +55,14 @@ class KakaoDaumSearch:
             "카페": "https://dapi.kakao.com/v2/search/cafe",
         }
 
-    def search_web(self, **kwargs):
-
+    def search_web(self, query, **kwargs):
         url = self.url_dict.get("웹문서")
-
+        kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
         except Exception as e:
             print(f"Request Error - {e}")
             return None
-
         if kwargs.get('dataframe'):
             try:
                 meta = response.json()['meta']
@@ -45,9 +73,8 @@ class KakaoDaumSearch:
                     f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
                 return pd.DataFrame(response.json()["documents"])
             except Exception as e:
-                print(f"DataFrame Error - {response.json()}")
+                print(f"DataFrame Error - {e} - {response.text}")
                 return None
-
         else:
             try:
                 return response.json()
@@ -55,16 +82,14 @@ class KakaoDaumSearch:
                 print(f"Json Error - {e}")
                 return None
 
-    def search_vclip(self, **kwargs):
-
+    def search_vclip(self, query, **kwargs):
         url = self.url_dict.get("동영상")
-
+        kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
         except Exception as e:
             print(f"Request Error - {e}")
             return None
-
         if kwargs.get('dataframe'):
             try:
                 meta = response.json()['meta']
@@ -75,9 +100,8 @@ class KakaoDaumSearch:
                     f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
                 return pd.DataFrame(response.json()["documents"])
             except Exception as e:
-                print(f"DataFrame Error - {e}")
+                print(f"DataFrame Error - {e} - {response.text}")
                 return None
-
         else:
             try:
                 return response.json()
@@ -85,16 +109,14 @@ class KakaoDaumSearch:
                 print(f"Json Error - {e}")
                 return None
 
-    def search_image(self, **kwargs):
-
+    def search_image(self, query, **kwargs):
         url = self.url_dict.get("이미지")
-
+        kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
         except Exception as e:
             print(f"Request Error - {e}")
             return None
-
         if kwargs.get('dataframe'):
             try:
                 meta = response.json()['meta']
@@ -105,9 +127,8 @@ class KakaoDaumSearch:
                     f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
                 return pd.DataFrame(response.json()["documents"])
             except Exception as e:
-                print(f"DataFrame Error - {e}")
+                print(f"DataFrame Error - {e} - {response.text}")
                 return None
-
         else:
             try:
                 return response.json()
@@ -115,16 +136,14 @@ class KakaoDaumSearch:
                 print(f"Json Error - {e}")
                 return None
 
-    def search_blog(self, **kwargs):
-
+    def search_blog(self, query, **kwargs):
         url = self.url_dict.get("블로그")
-
+        kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
         except Exception as e:
             print(f"Request Error - {e}")
             return None
-
         if kwargs.get('dataframe'):
             try:
                 meta = response.json()['meta']
@@ -135,9 +154,8 @@ class KakaoDaumSearch:
                     f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
                 return pd.DataFrame(response.json()["documents"])
             except Exception as e:
-                print(f"DataFrame Error - {e}")
+                print(f"DataFrame Error - {e} - {response.text}")
                 return None
-
         else:
             try:
                 return response.json()
@@ -145,16 +163,14 @@ class KakaoDaumSearch:
                 print(f"Json Error - {e}")
                 return None
 
-    def search_book(self, **kwargs):
-
+    def search_book(self, query, **kwargs):
         url = self.url_dict.get("책")
-
+        kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
         except Exception as e:
             print(f"Request Error - {e}")
             return None
-
         if kwargs.get('dataframe'):
             try:
                 meta = response.json()['meta']
@@ -165,9 +181,8 @@ class KakaoDaumSearch:
                     f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
                 return pd.DataFrame(response.json()["documents"])
             except Exception as e:
-                print(f"DataFrame Error - {e}")
+                print(f"DataFrame Error - {e} - {response.text}")
                 return None
-
         else:
             try:
                 return response.json()
@@ -175,16 +190,14 @@ class KakaoDaumSearch:
                 print(f"Json Error - {e}")
                 return None
 
-    def search_cafe(self, **kwargs):
-
+    def search_cafe(self, query, **kwargs):
         url = self.url_dict.get("카페")
-
+        kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
         except Exception as e:
             print(f"Request Error - {e}")
             return None
-
         if kwargs.get('dataframe'):
             try:
                 meta = response.json()['meta']
@@ -195,9 +208,193 @@ class KakaoDaumSearch:
                     f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
                 return pd.DataFrame(response.json()["documents"])
             except Exception as e:
-                print(f"DataFrame Error - {e}")
+                print(f"DataFrame Error - {e} - {response.text}")
+                return None
+        else:
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
                 return None
 
+
+class Local:
+    """
+    카카오 로컬 API 클래스
+
+    Parameters
+    ----------
+    service_key : string
+        카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키
+    """
+
+    def __init__(self, service_key=None):
+        self.service_key = service_key
+        self.headers = {"Authorization": f"KakaoAK {self.service_key}"}
+        self.url_dict = {
+            "주소 검색하기": "https://dapi.kakao.com/v2/local/search/address.json",
+            "좌표로 행정구역정보 받기": "https://dapi.kakao.com/v2/local/geo/coord2regioncode.json",
+            "좌표로 주소 변환하기": "https://dapi.kakao.com/v2/local/geo/coord2address.json",
+            "좌표계 변환하기": "https://dapi.kakao.com/v2/local/geo/transcoord.json",
+            "키워드로 장소 검색하기": "https://dapi.kakao.com/v2/local/search/keyword.json",
+            "카테고리로 장소 검색하기": "https://dapi.kakao.com/v2/local/search/category.json",
+        }
+
+    def search_address(self, query, **kwargs):
+        url = self.url_dict.get("주소 검색하기")
+        kwargs['query'] = query
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {e} - {response.text}")
+                return None
+        else:
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
+                return None
+
+    def geo_coord2regioncode(self, x, y, **kwargs):
+        url = self.url_dict.get("좌표로 행정구역정보 받기")
+        kwargs['x'], kwargs['y'] = x, y
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {e} - {response.text}")
+                return None
+        else:
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
+                return None
+
+    def geo_coord2address(self, x, y, **kwargs):
+        url = self.url_dict.get("좌표로 주소 변환하기")
+        kwargs['x'], kwargs['y'] = x, y
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {e} - {response.text}")
+                return None
+        else:
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
+                return None
+
+    def geo_transcoord(self, x, y, output_coord, **kwargs):
+        url = self.url_dict.get("좌표계 변환하기")
+        kwargs['x'], kwargs['y'], kwargs['output_coord'] = x, y, output_coord
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {e} - {response.text}")
+                return None
+        else:
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
+                return None
+
+    def search_keyword(self, query, **kwargs):
+        url = self.url_dict.get("키워드로 장소 검색하기")
+        kwargs['query'] = query
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {e} - {response.text}")
+                return None
+        else:
+            try:
+                return response.json()
+            except Exception as e:
+                print(f"Json Error - {e}")
+                return None
+
+    def search_category(self, category_group_code, **kwargs):
+        url = self.url_dict.get("카테고리로 장소 검색하기")
+        kwargs['category_group_code'] = category_group_code
+        try:
+            response = requests.get(url, headers=self.headers, params=kwargs)
+        except Exception as e:
+            print(f"Request Error - {e}")
+            return None
+        if kwargs.get('dataframe'):
+            try:
+                meta = response.json()['meta']
+                total_count = meta.get('total_count')
+                pageable_count = meta.get('pageable_count')
+                is_end = meta.get('is_end')
+                print(
+                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+                return pd.DataFrame(response.json()["documents"])
+            except Exception as e:
+                print(f"DataFrame Error - {e} - {response.text}")
+                return None
         else:
             try:
                 return response.json()
@@ -208,12 +405,12 @@ class KakaoDaumSearch:
 
 class KakaoLocal:
     """ 
-    카카오 로컬 API 클래스
+    (구) 카카오 로컬 API 클래스
 
     Parameters
     ----------
     service_key : string
-        카카오 개발자 센터에서 발급받은 애플리케이션 인증키
+        카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키
     """
 
     def __init__(self, service_key=None):
