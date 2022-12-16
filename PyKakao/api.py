@@ -3,6 +3,269 @@ import requests
 import pandas as pd
 
 
+class Message:
+    """
+    카카오 메시지 API 클래스
+
+    Parameters
+    ----------
+    service_key : str
+        카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키
+    """
+
+    def __init__(self, service_key=None, redirect_uri="https://localhost:5000", scope="talk_message"):
+        self.service_key = service_key
+        self.redirect_uri = redirect_uri
+        self.scope = scope
+        self.url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
+
+    def get_url_for_generatiing_code(self):
+        """
+        카카오 인증코드 발급 URL 생성
+
+        Returns
+        -------
+        str
+            카카오 인증코드 발급 URL
+        """
+        url = f"https://kauth.kakao.com/oauth/authorize?client_id={self.service_key}&redirect_uri={self.redirect_uri}&response_type=code&scope={self.scope}"
+        res = requests.get(url).url
+        return res
+
+    def get_code_by_redirected_url(self, url):
+        """
+        카카오 인증코드 추출
+
+        Parameters
+        ----------
+        url : str
+            카카오 인증코드 발급 URL 접속 후 리다이렉트된 URL
+
+        Returns
+        -------
+        str
+            카카오 인증코드
+        """
+        return url.split("code=")[1]
+
+    def get_access_token_by_code(self, code):
+        """
+        카카오 인증코드로 액세스 토큰 발급
+
+        Parameters
+        ----------
+        code : str
+            카카오 인증코드
+
+        Returns
+        -------
+        str
+            액세스 토큰
+        """
+        url = "https://kauth.kakao.com/oauth/token"
+        data = {
+            "grant_type": "authorization_code",
+            "client_id": self.service_key,
+            "redirect_uri": self.redirect_uri,
+            "code": code,
+        }
+        r = requests.post(url, data=data)
+        return r.json()['access_token']
+
+    def get_access_token_by_redirected_url(self, url):
+        """
+        카카오 인증코드 발급 URL 접속 후 리다이렉트된 URL로 액세스 토큰 발급
+
+        Parameters
+        ----------
+        url : str
+            카카오 인증코드 발급 URL 접속 후 리다이렉트된 URL
+
+        Returns
+        -------
+        str
+            액세스 토큰
+        """
+        code = self.get_code_by_redirected_url(url)
+        api_url = "https://kauth.kakao.com/oauth/token"
+        data = {
+            "grant_type": "authorization_code",
+            "client_id": self.service_key,
+            "redirect_uri": self.redirect_uri,
+            "code": code,
+        }
+        r = requests.post(api_url, data=data)
+        return r.json()['access_token']
+
+    def set_access_token(self, access_token):
+        """
+        액세스 토큰 설정
+
+        Parameters
+        ----------
+        access_token : str
+            액세스 토큰
+        """
+        self.headers = {"Authorization": f"Bearer {access_token}"}
+        print("액세스 토큰 설정 완료")
+
+    def send_text(self, text, link, **kwargs):
+        """
+        텍스트 메시지 전송
+
+        Parameters
+        ----------
+        text : str
+            전송할 메시지 (최대 200자)
+        """
+        params = {
+            "object_type": "text",
+            "text": text,
+            "link": link,
+        }
+        params.update(kwargs)
+        data = {"template_object": json.dumps(params)}
+        try:
+            r = requests.post(self.url, headers=self.headers, data=data)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"메시지 전송 실패")
+            print(e)
+            return
+        if r.json()['result_code'] == 0:
+            print("메시지 전송 성공")
+        else:
+            print(f"메시지 전송 실패")
+            print(r.json())
+
+    def send_feed(self, content, **kwargs):
+        """
+        피드 메시지 전송
+
+        Parameters
+        ----------
+        content : dict
+            피드 내용
+        """
+        params = {
+            "object_type": "feed",
+            "content": content,
+        }
+        params.update(kwargs)
+        data = {"template_object": json.dumps(params)}
+        try:
+            r = requests.post(self.url, headers=self.headers, data=data)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"메시지 전송 실패")
+            print(e)
+            return
+        if r.json()['result_code'] == 0:
+            print("메시지 전송 성공")
+        else:
+            print(f"메시지 전송 실패")
+            print(r.json())
+
+    def send_list(self, header_title, header_link, contents, **kwargs):
+        """
+        리스트 메시지 전송
+
+        Parameters
+        ----------
+        header_title : str
+            리스트 제목
+        header_link : dict
+            리스트 링크
+        contents : list
+            리스트 내용
+        """
+        params = {
+            "object_type": "list",
+            "header_title": header_title,
+            "header_link": header_link,
+            "contents": contents,
+        }
+        params.update(kwargs)
+        data = {"template_object": json.dumps(params)}
+        try:
+            r = requests.post(self.url, headers=self.headers, data=data)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"메시지 전송 실패")
+            print(e)
+            return
+        if r.json()['result_code'] == 0:
+            print("메시지 전송 성공")
+        else:
+            print(f"메시지 전송 실패")
+            print(r.json())
+
+    def send_location(self, address, address_title, content, **kwargs):
+        """
+        위치 메시지 전송
+
+        Parameters
+        ----------
+        address : str
+            주소
+        address_title : str
+            주소 제목
+        content : dict
+            위치 정보
+        """
+        params = {
+            "object_type": "location",
+            "address": address,
+            "address_title": address_title,
+            "content": content,
+        }
+        params.update(kwargs)
+        data = {"template_object": json.dumps(params)}
+        try:
+            r = requests.post(self.url, headers=self.headers, data=data)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"메시지 전송 실패")
+            print(e)
+            return
+        if r.json()['result_code'] == 0:
+            print("메시지 전송 성공")
+        else:
+            print(f"메시지 전송 실패")
+            print(r.json())
+
+    def send_commerce(self, content, commerce, **kwargs):
+        """
+        커머스 메시지 전송
+
+        Parameters
+        ----------
+        content : dict
+            커머스 정보
+        commerce : dict
+            상품 정보
+        """
+        params = {
+            "object_type": "commerce",
+            "content": content,
+            "commerce": commerce,
+        }
+        params.update(kwargs)
+        data = {"template_object": json.dumps(params)}
+        try:
+            r = requests.post(self.url, headers=self.headers, data=data)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"메시지 전송 실패")
+            print(e)
+            return
+        if r.json()['result_code'] == 0:
+            print("메시지 전송 성공")
+        else:
+            print(f"메시지 전송 실패")
+            print(r.json())
+
+
 class KoGPT:
     """
     카카오 KoGPT API 클래스
@@ -20,17 +283,33 @@ class KoGPT:
         self.url = "https://api.kakaobrain.com/v1/inference/kogpt/generation"
 
     def generate(self, prompt, max_tokens, **kwargs):
+        """
+        문장 생성
+
+        Parameters
+        ----------
+        prompt : str
+            문장 생성에 사용할 문장
+        max_tokens : int
+            생성할 문장의 최대 길이
+        **kwargs : dict
+            기타 파라미터
+
+        Returns
+        -------
+        dict
+            생성된 문장
+        """
         kwargs['prompt'], kwargs['max_tokens'] = prompt, max_tokens
         try:
-            response = requests.post(self.url, headers=self.headers, json=kwargs)
+            response = requests.post(
+                self.url, headers=self.headers, json=kwargs)
+            response.json = response.json()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        try:
-            return response.json()
-        except Exception as e:
-            print(f"Json Error - {e}")
-            return None
+            print("Error")
+            print(e)
+            return
+        return response.json
 
 
 class DaumSearch:
@@ -55,167 +334,215 @@ class DaumSearch:
             "카페": "https://dapi.kakao.com/v2/search/cafe",
         }
 
-    def search_web(self, query, **kwargs):
+    def search_web(self, query, dataframe=False, **kwargs):
+        """
+        웹문서 검색
+
+        Parameters
+        ----------
+        query : str
+            검색어
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("웹문서")
         kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
-    def search_vclip(self, query, **kwargs):
+    def search_vclip(self, query, dataframe=False, **kwargs):
+        """
+        동영상 검색
+
+        Parameters
+        ----------
+        query : str
+            검색어
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("동영상")
         kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
-    def search_image(self, query, **kwargs):
+    def search_image(self, query, dataframe=False, **kwargs):
+        """
+        이미지 검색
+
+        Parameters
+        ----------
+        query : str
+            검색어
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("이미지")
         kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
-    def search_blog(self, query, **kwargs):
+    def search_blog(self, query, dataframe=False, **kwargs):
+        """
+        블로그 검색
+
+        Parameters
+        ----------
+        query : str
+            검색어
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("블로그")
         kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
-    def search_book(self, query, **kwargs):
+    def search_book(self, query, dataframe=False, **kwargs):
+        """
+        책 검색
+
+        Parameters
+        ----------
+        query : str
+            검색어
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("책")
         kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
-    def search_cafe(self, query, **kwargs):
+    def search_cafe(self, query, dataframe=False, **kwargs):
+        """
+        카페 검색
+
+        Parameters
+        ----------
+        query : str
+            검색어
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("카페")
         kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
 
 class Local:
@@ -224,8 +551,8 @@ class Local:
 
     Parameters
     ----------
-    service_key : string
-        카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키
+    service_key : str
+        카카오 서비스 키
     """
 
     def __init__(self, service_key=None):
@@ -240,167 +567,235 @@ class Local:
             "카테고리로 장소 검색하기": "https://dapi.kakao.com/v2/local/search/category.json",
         }
 
-    def search_address(self, query, **kwargs):
+    def search_address(self, query, dataframe=False, **kwargs):
+        """
+        주소 검색하기
+
+        Parameters
+        ----------
+        query : string
+            검색을 원하는 질의어
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+        **kwargs : dict
+            https://developers.kakao.com/docs/latest/ko/local/dev-guide#address-coord 참고
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("주소 검색하기")
         kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
-    def geo_coord2regioncode(self, x, y, **kwargs):
+    def geo_coord2regioncode(self, x, y, dataframe=False, **kwargs):
+        """
+        좌표로 행정구역정보 받기
+
+        Parameters
+        ----------
+        x : float
+            경도
+        y : float
+            위도
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+        **kwargs : dict
+            https://developers.kakao.com/docs/latest/ko/local/dev-guide#coord-to-district 참고
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("좌표로 행정구역정보 받기")
         kwargs['x'], kwargs['y'] = x, y
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
-    def geo_coord2address(self, x, y, **kwargs):
+    def geo_coord2address(self, x, y, dataframe=False, **kwargs):
+        """
+        좌표로 주소 변환하기
+
+        Parameters
+        ----------
+        x : float
+            경도
+        y : float
+            위도
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+        **kwargs : dict
+            https://developers.kakao.com/docs/latest/ko/local/dev-guide#coord-to-address 참고
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("좌표로 주소 변환하기")
         kwargs['x'], kwargs['y'] = x, y
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
-    def geo_transcoord(self, x, y, output_coord, **kwargs):
+    def geo_transcoord(self, x, y, output_coord, dataframe=False, **kwargs):
+        """
+        좌표계 변환하기
+
+        Parameters
+        ----------
+        x : float
+            경도
+        y : float
+            위도
+        output_coord : str
+            변환할 좌표계
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+        **kwargs : dict
+            https://developers.kakao.com/docs/latest/ko/local/dev-guide#trans-coord 참고
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("좌표계 변환하기")
         kwargs['x'], kwargs['y'], kwargs['output_coord'] = x, y, output_coord
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
-    def search_keyword(self, query, **kwargs):
+    def search_keyword(self, query, dataframe=False, **kwargs):
+        """
+        키워드로 장소 검색하기
+
+        Parameters
+        ----------
+        query : str
+            검색을 원하는 질의어
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+        **kwargs : dict
+            https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword 참고
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("키워드로 장소 검색하기")
         kwargs['query'] = query
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
-    def search_category(self, category_group_code, **kwargs):
+    def search_category(self, category_group_code, dataframe=False, **kwargs):
+        """
+        카테고리로 장소 검색하기
+
+        Parameters
+        ----------
+        category_group_code : str
+            카테고리 코드
+        dataframe : bool
+            True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False
+        **kwargs : dict
+            https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-category 참고
+
+        Returns
+        -------
+        DataFrame or dict
+            DataFrame으로 반환하려면 dataframe=True로 설정
+        """
         url = self.url_dict.get("카테고리로 장소 검색하기")
         kwargs['category_group_code'] = category_group_code
         try:
             response = requests.get(url, headers=self.headers, params=kwargs)
+            response.raise_for_status()
         except Exception as e:
-            print(f"Request Error - {e}")
-            return None
-        if kwargs.get('dataframe'):
-            try:
-                meta = response.json()['meta']
-                total_count = meta.get('total_count')
-                pageable_count = meta.get('pageable_count')
-                is_end = meta.get('is_end')
-                print(
-                    f"total_count: {total_count}, pageable_count: {pageable_count}, is_end: {is_end}")
+            print("Request Error")
+            print(e)
+            return
+        try:
+            if dataframe:
                 return pd.DataFrame(response.json()["documents"])
-            except Exception as e:
-                print(f"DataFrame Error - {e} - {response.text}")
-                return None
-        else:
-            try:
+            else:
                 return response.json()
-            except Exception as e:
-                print(f"Json Error - {e}")
-                return None
+        except Exception as e:
+            print("Export Error")
+            print(e)
+            return
 
 
 class KakaoLocal:

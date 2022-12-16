@@ -3,5 +3,6 @@ from .config.info import __project__, __version__, __author__, __contact__, __gi
 
 __all__ = [
     "__project__", "__version__", "__author__", "__contact__", "__github__",
-    "Local", "DaumSearch", "KoGPT",
+    "KakaoLocal",
+    "Local", "DaumSearch", "KoGPT", "Message",
 ]
