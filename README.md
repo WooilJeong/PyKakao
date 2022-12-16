@@ -1,6 +1,6 @@
 <div align="center">
 
-<b>카카오 데이터 조회를 위한 오픈소스 로우코드 파이썬 라이브러리</b><br>
+<b>카카오 API를 사용하기 위한 오픈소스 로우코드 파이썬 라이브러리</b><br>
 <b>🚀`pip install PyKakao --upgrade`</b>
 
 [![PyPI Latest Release](https://img.shields.io/pypi/v/pykakao.svg)](https://pypi.org/project/pykakao/)
@@ -15,243 +15,138 @@
 
 ## PyKakao
 
-PyKakao는 [kakao developers](https://developers.kakao.com/)에서 제공하는 [로컬(Local) API](https://developers.kakao.com/docs/latest/ko/local/common)를 이용할 수 있는 Python Client 입니다. PyKakao를 정상적으로 이용하기 위해서는 kakao developers 애플리케이션 추가를 통해 발급되는 REST API 키가 필요합니다.
+**PyKakao** 라이브러리를 사용하면 [Kakao Developers](https://developers.kakao.com/)에서 제공하는 여러 종류의 카카오 API를 파이썬으로 쉽게 사용할 수 있습니다. 예를 들어, [Daum 검색 API](https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide)를 이용해서 웹에서 정보를 검색할 수 있고, [메시지 API](https://developers.kakao.com/docs/latest/ko/message/rest-api)를 사용해서 카카오톡 메시지를 전송할 수 있습니다. 또한, [로컬 API](https://developers.kakao.com/docs/latest/ko/local/dev-guide)를 통해 주변 정보를 조회할 수 있고, [KoGPT API](https://developers.kakao.com/docs/latest/ko/kogpt/rest-api)를 이용해서 자연어 처리를 할 수 있습니다.
+
 
 <br>
 
 ## 설치 방법
 
-- Windows: CMD(명령 프롬프트)를 열어 아래 Shell 명령어를 입력
-- Mac: Terminal(터미널)을 열어 아래 Shell 명령어를 입력
+1. 운영체제(OS)에 따라 아래 중 하나를 선택합니다.
+
+- Windows: CMD(명령 프롬프트) 실행
+- Mac: Terminal(터미널) 실행
+
+2. 아래 Shell 명령어를 입력 후 실행합니다.
 
 ```bash
-pip install PyKakao
+pip install PyKakao --upgrade
 ```
+
+<br>
+
+## REST API 키 발급 방법
+
+PyKakao 라이브러리로 카카오 API를 사용하기 위해서는 [Kakao Developers](https://developers.kakao.com/)에 가입해야 합니다. 가입 후 로그인한 상태에서 상단 메뉴의 [내 애플리케이션](https://developers.kakao.com/console/app)을 선택합니다. '애플리케이션 추가하기'를 눌러 팝업창이 뜨면 '앱 이름', '사업자명'을 입력하고, 운영정책에 동의 후 '저장'을 선택합니다. 추가한 애플리케이션을 선택하면 '앱 키' 아래에 '**REST API 키**'가 생성된 것을 확인할 수 있습니다.
+
 
 <br>
 
 ## 사용 방법
 
-### 카카오 로컬 API 기능 불러오기
+### Daum 검색 API
 
 ```python
-from PyKakao import KakaoLocal
+from PyKakao import DaumSearch
 
-# kakao developers에서 발급받은 REST API 키	
-service_key = "REST API 키"
+# Daum 검색 API 인스턴스 생성
+DAUM = DaumSearch(service_key = "REST API 키")
 
-# kakao local API 세션 정의
-KL = KakaoLocal(service_key)
+# 웹문서 검색
+df = DAUM.search_web("파이썬", dataframe=True)
+
+# 동영상 검색
+df = DAUM.search_vclip("파이썬", dataframe=True)
+
+# 이미지 검색
+df = DAUM.search_image("파이썬", dataframe=True)
+
+# 블로그 검색
+df = DAUM.search_blog("파이썬", dataframe=True)
+
+# 책 검색
+df = DAUM.search_book("파이썬", dataframe=True)
+
+# 카페 검색
+df = DAUM.search_cafe("파이썬", dataframe=True)
 ```
 
-### 1. 주소 검색하기
+
+### 메시지 API
 
 ```python
-# 1. 주소 검색하기
-address = "백현동 541"
-result = KL.search_address(address)
-result
+from PyKakao import Message
+
+# 메시지 API 인스턴스 생성
+MSG = Message(service_key = "REST API 키")
+
+# 카카오 인증코드 발급 URL 생성
+auth_url = MSG.get_url_for_generatiing_code()
+print(auth_url)
+
+# 카카오 인증코드 발급 URL 접속 후 리다이렉트된 URL
+url = ""
+
+# 위 URL로 액세스 토큰 추출
+access_token = MSG.get_access_token_by_redirected_url(url)
+
+# 액세스 토큰 설정
+MSG.set_access_token(access_token)
+
+# 텍스트 메시지 전송
+text = "텍스트 영역입니다. 최대 200자 표시 가능합니다."
+link = {
+            "web_url": "https://developers.kakao.com",
+            "mobile_web_url": "https://developers.kakao.com"
+        }
+button_title = "바로 확인"
+
+MSG.send_text(text=text, link={}, button_title=button_title)
 ```
 
-```
-{'documents': [{'address': {'address_name': '경기 성남시 분당구 백현동 541',
-    'b_code': '4113511000',
-    'h_code': '4113565700',
-    'main_address_no': '541',
-    'mountain_yn': 'N',
-    'region_1depth_name': '경기',
-    'region_2depth_name': '성남시 분당구',
-    'region_3depth_h_name': '백현동',
-    'region_3depth_name': '백현동',
-    'sub_address_no': '',
-    'x': '127.112037135835',
-    'y': '37.3926536571583'},
-   'address_name': '경기 성남시 분당구 백현동 541',
-   'address_type': 'REGION_ADDR',
-   'road_address': {'address_name': '경기 성남시 분당구 판교역로146번길 20',
-    'building_name': '현대백화점 판교점',
-    'main_building_no': '20',
-    'region_1depth_name': '경기',
-    'region_2depth_name': '성남시 분당구',
-    'region_3depth_name': '백현동',
-    'road_name': '판교역로146번길',
-    'sub_building_no': '',
-    'underground_yn': 'N',
-    'x': '127.112017130086',
-    'y': '37.39279369494',
-    'zone_no': '13529'},
-   'x': '127.112037135835',
-   'y': '37.3926536571583'}],
- 'meta': {'is_end': True, 'pageable_count': 1, 'total_count': 1}}
-```
 
-### 2. 좌표로 행정구역정보 받기
+### 로컬 API
 
 ```python
-# 2. 좌표로 행정구역정보 받기
-x, y = 127.11198669812507, 37.392627919703536
-result = KL.geo_coord2regioncode(x, y)
-result
+from PyKakao import Local
+
+# 로컬 API 인스턴스 생성
+LOCAL = Local(service_key = "REST API 키")
+
+# 주소 검색하기
+df =  LOCAL.search_address("백현동", dataframe=True)
+
+# 좌표로 행정구역정보 받기
+df =  LOCAL.geo_coord2regioncode(127.110871319215, 37.3885490672089, dataframe=True)
+
+# 좌표로 주소 변환하기
+df =  LOCAL.geo_coord2address(127.110871319215, 37.3885490672089, dataframe=True)
+
+# 좌표계 변환하기
+df =  LOCAL.geo_transcoord(127.110871319215, 37.3885490672089, "WCONGNAMUL", dataframe=True)
+
+# 키워드로 장소 검색하기
+df =  LOCAL.search_keyword("판교역", dataframe=True)
+
+# 카테고리로 장소 검색하기
+df =  LOCAL.search_category("MT1", x=127.110871319215, y=37.3885490672089, radius=500, dataframe=True)
 ```
 
-```
-{'meta': {'total_count': 2},
- 'documents': [{'region_type': 'B',
-   'code': '4113511000',
-   'address_name': '경기도 성남시 분당구 백현동',
-   'region_1depth_name': '경기도',
-   'region_2depth_name': '성남시 분당구',
-   'region_3depth_name': '백현동',
-   'region_4depth_name': '',
-   'x': 127.11087131921613,
-   'y': 37.388549067217625},
-  {'region_type': 'H',
-   'code': '4113565700',
-   'address_name': '경기도 성남시 분당구 백현동',
-   'region_1depth_name': '경기도',
-   'region_2depth_name': '성남시 분당구',
-   'region_3depth_name': '백현동',
-   'region_4depth_name': '',
-   'x': 127.11087131921613,
-   'y': 37.388549067217625}]}
-```
 
-### 3. 좌표로 주소 변환하기
+### KoGPT API
 
 ```python
-# 3. 좌표로 주소 변환하기
-x, y = 127.11198669812507, 37.392627919703536
-result = KL.geo_coord2address(x, y)
-result
+from PyKako import KoGPT
+
+# KoGPT API 인스턴스 생성
+GPT = KoGPT(service_key = "REST API 키")
+
+# 다음 문장 만들기
+prompt = "인간처럼 생각하고, 행동하는 '지능'을 통해 인류가 이제까지 풀지 못했던"
+max_tokens = 64
+result = GPT.generate(prompt, max_tokens, temperature=0.7, top_p=0.8)
 ```
 
-```
-{'meta': {'total_count': 1},
- 'documents': [{'road_address': {'address_name': '경기도 성남시 분당구 판교역로146번길 20',
-    'region_1depth_name': '경기',
-    'region_2depth_name': '성남시 분당구',
-    'region_3depth_name': '',
-    'road_name': '판교역로146번길',
-    'underground_yn': 'N',
-    'main_building_no': '20',
-    'sub_building_no': '',
-    'building_name': '현대백화점 판교점',
-    'zone_no': '13529'},
-   'address': {'address_name': '경기 성남시 분당구 백현동 541',
-    'region_1depth_name': '경기',
-    'region_2depth_name': '성남시 분당구',
-    'region_3depth_name': '백현동',
-    'mountain_yn': 'N',
-    'main_address_no': '541',
-    'sub_address_no': '',
-    'zip_code': ''}}]}
-```
-
-### 4. 좌표계 변환하기
-
-```python
-# 4. 좌표계 변환하기
-x, y = 127.11198669812507, 37.392627919703536
-output_coord = "WTM"
-input_coord = "WGS84"
-result = KL.geo_transcoord(x, y, output_coord, input_coord)
-result
-```
-
-```
-{'meta': {'total_count': 1},
- 'documents': [{'x': 209916.63703445005, 'y': 432593.2082232768}]}
-```
-
-### 5. 키워드로 장소 검색하기
-
-```python
-# 5. 키워드로 장소 검색하기
-query = "스타벅스"
-category_group_code = "CE7"                     # 카페
-x, y = 127.11198669812507, 37.392627919703536   # 중심 좌표
-radius = 500                                    # 반경거리(m)
-
-result = KL.search_keyword(query, category_group_code, x, y, radius)
-result
-```
-
-```
-{'documents': [{'address_name': '경기 성남시 분당구 백현동 537',
-   'category_group_code': 'CE7',
-   'category_group_name': '카페',
-   'category_name': '음식점 > 카페 > 커피전문점 > 스타벅스',
-   'distance': '231',
-   'id': '382618195',
-   'phone': '1522-3232',
-   'place_name': '스타벅스 판교알파돔타워',
-   'place_url': 'http://place.map.kakao.com/382618195',
-   'road_address_name': '경기 성남시 분당구 판교역로 152',
-   'x': '127.110364770136',
-   'y': '37.3942620223016'},
-  {'address_name': '경기 성남시 분당구 백현동 531',
-   'category_group_code': 'CE7',
-   'category_group_name': '카페',
-   'category_name': '음식점 > 카페 > 커피전문점 > 스타벅스',
-   'distance': '309',
-   'id': '27528340',
-   'phone': '1522-3232',
-   'place_name': '스타벅스 판교알파돔시티점',
-   'place_url': 'http://place.map.kakao.com/27528340',
-   'road_address_name': '경기 성남시 분당구 대왕판교로606번길 10',
-   'x': '127.109353202048',
-   'y': '37.3944611869007'}],
- 'meta': {'is_end': True,
-  'pageable_count': 2,
-  'same_name': {'keyword': '스타벅스', 'region': [], 'selected_region': ''},
-  'total_count': 2}}
-```
-
-### 6. 카테고리로 장소 검색하기
-
-```python
-# 6. 카테고리로 장소 검색하기
-category_group_code = "CE7"                     # 카페
-x, y = 127.11198669812507, 37.392627919703536   # 중심 좌표
-radius = 50                                     # 반경거리(m)
-
-result = KL.search_category(category_group_code, x, y, radius)
-result
-```
-
-```
-{'documents': [{'address_name': '경기 성남시 분당구 백현동 541',
-   'category_group_code': 'CE7',
-   'category_group_name': '카페',
-   'category_name': '음식점 > 카페',
-   'distance': '4',
-   'id': '1513310698',
-   'phone': '031-5170-1354',
-   'place_name': '메종키츠네카페',
-   'place_url': 'http://place.map.kakao.com/1513310698',
-   'road_address_name': '경기 성남시 분당구 판교역로146번길 20',
-   'x': '127.11195356152',
-   'y': '37.3926486004944'},
-  {'address_name': '경기 성남시 분당구 백현동 541',
-   'category_group_code': 'CE7',
-   'category_group_name': '카페',
-   'category_name': '음식점 > 카페 > 커피전문점',
-   'distance': '20',
-   'id': '768523904',
-   'phone': '031-5170-3259',
-   'place_name': '카멜커피',
-   'place_url': 'http://place.map.kakao.com/768523904',
-   'road_address_name': '경기 성남시 분당구 판교역로146번길 20',
-   'x': '127.11208816176',
-   'y': '37.3927935375378'},
-  {'address_name': '경기 성남시 분당구 백현동 541',
-   'x': '127.112029412303',
-   'y': '37.3927755727699'}],
- 'meta': {'is_end': False,
-  'pageable_count': 32,
-  'same_name': None,
-  'total_count': 32}}
-```
 
 <br>
 
