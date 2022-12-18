@@ -39,12 +39,13 @@ pip install PyKakao --upgrade
 
 PyKakao 라이브러리로 카카오 API를 사용하기 위해서는 [Kakao Developers](https://developers.kakao.com/)에 가입해야 합니다. 가입 후 로그인한 상태에서 상단 메뉴의 [내 애플리케이션](https://developers.kakao.com/console/app)을 선택합니다. '애플리케이션 추가하기'를 눌러 팝업창이 뜨면 '앱 이름', '사업자명'을 입력하고, 운영정책에 동의 후 '저장'을 선택합니다. 추가한 애플리케이션을 선택하면 '앱 키' 아래에 '**REST API 키**'가 생성된 것을 확인할 수 있습니다.
 
-
 <br>
 
 ## 사용 방법
 
 ### Daum 검색 API
+
+Daum 검색 API는 포털 사이트 Daum에서 방대한 웹 문서, 동영상, 이미지, 블로그, 책, 카페를 검색하는 기능을 제공합니다.
 
 ```python
 from PyKakao import DaumSearch
@@ -71,8 +72,72 @@ df = DAUM.search_book("파이썬", dataframe=True)
 df = DAUM.search_cafe("파이썬", dataframe=True)
 ```
 
+<br>
+
+### 로컬 API
+
+로컬(local) API는 키워드로 특정 장소 정보를 조회하거나, 좌표를 주소 또는 행정구역으로 변환하는 등 장소에 대한 정보를 제공합니다. 특정 카테고리로 장소를 검색하는 등 폭넓은 활용이 가능하며, 지번 주소와 도로명 주소 체계를 모두 지원합니다.
+
+```python
+from PyKakao import Local
+
+# 로컬 API 인스턴스 생성
+LOCAL = Local(service_key = "REST API 키")
+
+# 주소 검색하기
+df =  LOCAL.search_address("백현동", dataframe=True)
+
+# 좌표로 행정구역정보 받기
+df =  LOCAL.geo_coord2regioncode(127.110871319215, 37.3885490672089, dataframe=True)
+
+# 좌표로 주소 변환하기
+df =  LOCAL.geo_coord2address(127.110871319215, 37.3885490672089, dataframe=True)
+
+# 좌표계 변환하기
+df =  LOCAL.geo_transcoord(127.110871319215, 37.3885490672089, "WCONGNAMUL", dataframe=True)
+
+# 키워드로 장소 검색하기
+df =  LOCAL.search_keyword("판교역", dataframe=True)
+
+# 카테고리로 장소 검색하기
+df =  LOCAL.search_category("MT1", x=127.110871319215, y=37.3885490672089, radius=500, dataframe=True)
+```
+
+<br>
+
+### KoGPT API
+
+KoGPT API는 다양한 한국어 과제를 수행할 수 있는 기능을 제공합니다. 카카오브레인의 KoGPT는 방대한 데이터로 훈련된 [GPT-3](https://ko.wikipedia.org/wiki/GPT-3) 기반의 인공지능(Artifical Intelligence, AI) 한국어 언어 모델입니다.
+
+```python
+from PyKako import KoGPT
+
+# KoGPT API 인스턴스 생성
+GPT = KoGPT(service_key = "REST API 키")
+
+# 다음 문장 만들기
+prompt = "인간처럼 생각하고, 행동하는 '지능'을 통해 인류가 이제까지 풀지 못했던"
+max_tokens = 64
+result = GPT.generate(prompt, max_tokens, temperature=0.7, top_p=0.8)
+```
+
+<br>
 
 ### 메시지 API
+
+메시지 API는 사용자가 카카오톡 친구에게 카카오톡 메시지를 보내는 기능을 제공합니다. PyKakao의 최신 버전에서는 '나에게 보내기' 기능만 이용할 수 있습니다.
+
+메시지 API의 경우 아래 '카카오 로그인 관련 설정하기'와 같이 설정 후 정상적으로 이용할 수 있습니다.
+
+- 카카오 로그인 관련 설정하기
+
+1. [Kakao Developers](https://developers.kakao.com/)에 접속
+2. [내 애플리케이션](https://developers.kakao.com/console/app) 선택 후 위에서 생성한 애플리케이션 선택
+3. 내비게이션 메뉴에서 **카카오 로그인** 클릭 후 **활성화 설정**의 **상태 버튼("OFF")**을 클릭
+4. 팝업 창에서 **활성화** 버튼 클릭
+5. 카카오 로그인 화면 하단의 **Redirect URI 등록** 버튼 클릭
+6. 팝업 창에서 **Redirect URI** 항목에 로컬 주소인 'https://localhost:5000' 입력 후 **저장** 버튼 클릭
+
 
 ```python
 from PyKakao import Message
@@ -103,50 +168,6 @@ button_title = "바로 확인"
 
 MSG.send_text(text=text, link={}, button_title=button_title)
 ```
-
-
-### 로컬 API
-
-```python
-from PyKakao import Local
-
-# 로컬 API 인스턴스 생성
-LOCAL = Local(service_key = "REST API 키")
-
-# 주소 검색하기
-df =  LOCAL.search_address("백현동", dataframe=True)
-
-# 좌표로 행정구역정보 받기
-df =  LOCAL.geo_coord2regioncode(127.110871319215, 37.3885490672089, dataframe=True)
-
-# 좌표로 주소 변환하기
-df =  LOCAL.geo_coord2address(127.110871319215, 37.3885490672089, dataframe=True)
-
-# 좌표계 변환하기
-df =  LOCAL.geo_transcoord(127.110871319215, 37.3885490672089, "WCONGNAMUL", dataframe=True)
-
-# 키워드로 장소 검색하기
-df =  LOCAL.search_keyword("판교역", dataframe=True)
-
-# 카테고리로 장소 검색하기
-df =  LOCAL.search_category("MT1", x=127.110871319215, y=37.3885490672089, radius=500, dataframe=True)
-```
-
-
-### KoGPT API
-
-```python
-from PyKako import KoGPT
-
-# KoGPT API 인스턴스 생성
-GPT = KoGPT(service_key = "REST API 키")
-
-# 다음 문장 만들기
-prompt = "인간처럼 생각하고, 행동하는 '지능'을 통해 인류가 이제까지 풀지 못했던"
-max_tokens = 64
-result = GPT.generate(prompt, max_tokens, temperature=0.7, top_p=0.8)
-```
-
 
 <br>
 
