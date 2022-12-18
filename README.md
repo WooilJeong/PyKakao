@@ -133,7 +133,7 @@ result = GPT.generate(prompt, max_tokens, temperature=0.7, top_p=0.8)
 
 1. [Kakao Developers](https://developers.kakao.com/)에 접속
 2. [내 애플리케이션](https://developers.kakao.com/console/app) 선택 후 위에서 생성한 애플리케이션 선택
-3. 내비게이션 메뉴에서 **카카오 로그인** 클릭 후 **활성화 설정**의 **상태 버튼(OFF)**을 클릭
+3. 내비게이션 메뉴에서 **카카오 로그인** 클릭 후 **활성화 설정**의 **상태 버튼**(OFF)을 클릭
 4. 팝업 창에서 **활성화** 버튼 클릭
 5. 카카오 로그인 화면 하단의 **Redirect URI 등록** 버튼 클릭
 6. 팝업 창에서 **Redirect URI** 항목에 로컬 주소인 'https://localhost:5000' 입력 후 **저장** 버튼 클릭
