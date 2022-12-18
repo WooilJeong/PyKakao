@@ -153,7 +153,7 @@ result = GPT.generate(prompt, max_tokens, temperature=0.7, top_p=0.8)
 ## 참고
 
 - **튜토리얼**  
-    - [(블로그) PyKakao - Python 카카오 API 클라이언트](https://wooiljeong.github.io/python/pykakao/)
+    - [PyKakao - 카카오 API 파이썬 라이브러리](https://wooiljeong.github.io/python/pykakao/)
 
 - **공식문서**
   - [Docs](https://wooiljeong.github.io/PyKakao/)
