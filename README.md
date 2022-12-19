@@ -1,6 +1,6 @@
 <div align="center">
 
-<b>카카오 API를 사용하기 위한 오픈소스 로우코드 파이썬 라이브러리</b><br>
+<b>카카오 API를 사용하기 위한 오픈소스 파이썬 라이브러리</b><br>
 <b>🚀`pip install PyKakao --upgrade`</b>
 
 [![PyPI Latest Release](https://img.shields.io/pypi/v/pykakao.svg)](https://pypi.org/project/pykakao/)
