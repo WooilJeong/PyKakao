@@ -101,13 +101,145 @@
 <section id="module-PyKakao.api">
 <span id="pykakao-api-module"></span><h2>PyKakao.api module<a class="headerlink" href="#module-PyKakao.api" title="이 표제에 대한 퍼머링크"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="PyKakao.api.KakaoLocal">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.api.</span></span><span class="sig-name descname"><span class="pre">KakaoLocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.KakaoLocal" title="이 정의에 대한 퍼머링크"></a></dt>
+<dt class="sig sig-object py" id="PyKakao.api.DaumSearch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.api.</span></span><span class="sig-name descname"><span class="pre">DaumSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.DaumSearch" title="이 정의에 대한 퍼머링크"></a></dt>
 <dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>카카오 로컬 API 클래스</p>
+<p>카카오 다음 검색 API 클래스</p>
 <dl class="field-list simple">
 <dt class="field-odd">매개변수</dt>
-<dd class="field-odd"><p><strong>service_key</strong> (<em>string</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션 인증키</p>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>str</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.DaumSearch.search_blog">
+<span class="sig-name descname"><span class="pre">search_blog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.DaumSearch.search_blog" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>블로그 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.DaumSearch.search_book">
+<span class="sig-name descname"><span class="pre">search_book</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.DaumSearch.search_book" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>책 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.DaumSearch.search_cafe">
+<span class="sig-name descname"><span class="pre">search_cafe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.DaumSearch.search_cafe" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카페 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.DaumSearch.search_image">
+<span class="sig-name descname"><span class="pre">search_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.DaumSearch.search_image" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>이미지 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.DaumSearch.search_vclip">
+<span class="sig-name descname"><span class="pre">search_vclip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.DaumSearch.search_vclip" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>동영상 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.DaumSearch.search_web">
+<span class="sig-name descname"><span class="pre">search_web</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.DaumSearch.search_web" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>웹문서 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyKakao.api.KakaoLocal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.api.</span></span><span class="sig-name descname"><span class="pre">KakaoLocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.KakaoLocal" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>(구) 카카오 로컬 API 클래스</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>string</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키</p>
 </dd>
 </dl>
 <dl class="py method">
@@ -211,17 +343,478 @@
 
 </dd></dl>
 
-</section>
-<section id="module-PyKakao">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-PyKakao" title="이 표제에 대한 퍼머링크"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="PyKakao.KakaoLocal">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.</span></span><span class="sig-name descname"><span class="pre">KakaoLocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.KakaoLocal" title="이 정의에 대한 퍼머링크"></a></dt>
+<dt class="sig sig-object py" id="PyKakao.api.KoGPT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.api.</span></span><span class="sig-name descname"><span class="pre">KoGPT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.KoGPT" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>카카오 KoGPT API 클래스</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>str</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.KoGPT.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_tokens</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.KoGPT.generate" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>문장 생성</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prompt</strong> (<em>str</em>) – 문장 생성에 사용할 문장</p></li>
+<li><p><strong>max_tokens</strong> (<em>int</em>) – 생성할 문장의 최대 길이</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – 기타 파라미터</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>생성된 문장</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyKakao.api.Local">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.api.</span></span><span class="sig-name descname"><span class="pre">Local</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Local" title="이 정의에 대한 퍼머링크"></a></dt>
 <dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>카카오 로컬 API 클래스</p>
 <dl class="field-list simple">
 <dt class="field-odd">매개변수</dt>
-<dd class="field-odd"><p><strong>service_key</strong> (<em>string</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션 인증키</p>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>str</em>) – 카카오 서비스 키</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Local.geo_coord2address">
+<span class="sig-name descname"><span class="pre">geo_coord2address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Local.geo_coord2address" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>좌표로 주소 변환하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – 경도</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – 위도</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#coord-to-address">https://developers.kakao.com/docs/latest/ko/local/dev-guide#coord-to-address</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Local.geo_coord2regioncode">
+<span class="sig-name descname"><span class="pre">geo_coord2regioncode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Local.geo_coord2regioncode" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>좌표로 행정구역정보 받기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – 경도</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – 위도</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#coord-to-district">https://developers.kakao.com/docs/latest/ko/local/dev-guide#coord-to-district</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Local.geo_transcoord">
+<span class="sig-name descname"><span class="pre">geo_transcoord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_coord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Local.geo_transcoord" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>좌표계 변환하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – 경도</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – 위도</p></li>
+<li><p><strong>output_coord</strong> (<em>str</em>) – 변환할 좌표계</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#trans-coord">https://developers.kakao.com/docs/latest/ko/local/dev-guide#trans-coord</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Local.search_address">
+<span class="sig-name descname"><span class="pre">search_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Local.search_address" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>주소 검색하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>string</em>) – 검색을 원하는 질의어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#address-coord">https://developers.kakao.com/docs/latest/ko/local/dev-guide#address-coord</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Local.search_category">
+<span class="sig-name descname"><span class="pre">search_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category_group_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Local.search_category" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카테고리로 장소 검색하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>category_group_code</strong> (<em>str</em>) – 카테고리 코드</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-category">https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-category</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Local.search_keyword">
+<span class="sig-name descname"><span class="pre">search_keyword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Local.search_keyword" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>키워드로 장소 검색하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색을 원하는 질의어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword">https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyKakao.api.Message">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.api.</span></span><span class="sig-name descname"><span class="pre">Message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redirect_uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://localhost:5000'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'talk_message'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Message" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>카카오 메시지 API 클래스</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>str</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Message.get_access_token_by_code">
+<span class="sig-name descname"><span class="pre">get_access_token_by_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Message.get_access_token_by_code" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카카오 인증코드로 액세스 토큰 발급</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>code</strong> (<em>str</em>) – 카카오 인증코드</p>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>액세스 토큰</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Message.get_access_token_by_redirected_url">
+<span class="sig-name descname"><span class="pre">get_access_token_by_redirected_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Message.get_access_token_by_redirected_url" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카카오 인증코드 발급 URL 접속 후 리다이렉트된 URL로 액세스 토큰 발급</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>url</strong> (<em>str</em>) – 카카오 인증코드 발급 URL 접속 후 리다이렉트된 URL</p>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>액세스 토큰</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Message.get_code_by_redirected_url">
+<span class="sig-name descname"><span class="pre">get_code_by_redirected_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Message.get_code_by_redirected_url" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카카오 인증코드 추출</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>url</strong> (<em>str</em>) – 카카오 인증코드 발급 URL 접속 후 리다이렉트된 URL</p>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>카카오 인증코드</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Message.get_url_for_generatiing_code">
+<span class="sig-name descname"><span class="pre">get_url_for_generatiing_code</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Message.get_url_for_generatiing_code" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카카오 인증코드 발급 URL 생성</p>
+<dl class="field-list simple">
+<dt class="field-odd">반환</dt>
+<dd class="field-odd"><p>카카오 인증코드 발급 URL</p>
+</dd>
+<dt class="field-even">반환 형식</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Message.send_commerce">
+<span class="sig-name descname"><span class="pre">send_commerce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commerce</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Message.send_commerce" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>커머스 메시지 전송</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> (<em>dict</em>) – 커머스 정보</p></li>
+<li><p><strong>commerce</strong> (<em>dict</em>) – 상품 정보</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Message.send_feed">
+<span class="sig-name descname"><span class="pre">send_feed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Message.send_feed" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>피드 메시지 전송</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>content</strong> (<em>dict</em>) – 피드 내용</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Message.send_list">
+<span class="sig-name descname"><span class="pre">send_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header_title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_link</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contents</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Message.send_list" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>리스트 메시지 전송</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>header_title</strong> (<em>str</em>) – 리스트 제목</p></li>
+<li><p><strong>header_link</strong> (<em>dict</em>) – 리스트 링크</p></li>
+<li><p><strong>contents</strong> (<em>list</em>) – 리스트 내용</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Message.send_location">
+<span class="sig-name descname"><span class="pre">send_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address_title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Message.send_location" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>위치 메시지 전송</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>str</em>) – 주소</p></li>
+<li><p><strong>address_title</strong> (<em>str</em>) – 주소 제목</p></li>
+<li><p><strong>content</strong> (<em>dict</em>) – 위치 정보</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Message.send_text">
+<span class="sig-name descname"><span class="pre">send_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">link</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Message.send_text" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>텍스트 메시지 전송</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – 전송할 메시지 (최대 200자)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Message.set_access_token">
+<span class="sig-name descname"><span class="pre">set_access_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Message.set_access_token" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>액세스 토큰 설정</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>access_token</strong> (<em>str</em>) – 액세스 토큰</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-PyKakao">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-PyKakao" title="이 표제에 대한 퍼머링크"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="PyKakao.DaumSearch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.</span></span><span class="sig-name descname"><span class="pre">DaumSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.DaumSearch" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>카카오 다음 검색 API 클래스</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>str</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.DaumSearch.search_blog">
+<span class="sig-name descname"><span class="pre">search_blog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.DaumSearch.search_blog" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>블로그 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.DaumSearch.search_book">
+<span class="sig-name descname"><span class="pre">search_book</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.DaumSearch.search_book" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>책 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.DaumSearch.search_cafe">
+<span class="sig-name descname"><span class="pre">search_cafe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.DaumSearch.search_cafe" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카페 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.DaumSearch.search_image">
+<span class="sig-name descname"><span class="pre">search_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.DaumSearch.search_image" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>이미지 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.DaumSearch.search_vclip">
+<span class="sig-name descname"><span class="pre">search_vclip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.DaumSearch.search_vclip" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>동영상 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.DaumSearch.search_web">
+<span class="sig-name descname"><span class="pre">search_web</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.DaumSearch.search_web" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>웹문서 검색</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyKakao.KakaoLocal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.</span></span><span class="sig-name descname"><span class="pre">KakaoLocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.KakaoLocal" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>(구) 카카오 로컬 API 클래스</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>string</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키</p>
 </dd>
 </dl>
 <dl class="py method">
@@ -319,6 +912,335 @@
 <li><p><strong>size</strong> (<em>str</em>) – 한 페이지에 보여질 문서의 개수. (최소: 1, 최대: 45, 기본값: 15)</p></li>
 <li><p><strong>sort</strong> (<em>str</em>) – 결과 정렬 순서. distance 정렬을 원할 때는 기준 좌표로 쓰일 x, y와 함께 사용 distance 또는 accuracy(기본값: accuracy)</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyKakao.KoGPT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.</span></span><span class="sig-name descname"><span class="pre">KoGPT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.KoGPT" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>카카오 KoGPT API 클래스</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>str</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.KoGPT.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_tokens</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.KoGPT.generate" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>문장 생성</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prompt</strong> (<em>str</em>) – 문장 생성에 사용할 문장</p></li>
+<li><p><strong>max_tokens</strong> (<em>int</em>) – 생성할 문장의 최대 길이</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – 기타 파라미터</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>생성된 문장</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyKakao.Local">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.</span></span><span class="sig-name descname"><span class="pre">Local</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Local" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>카카오 로컬 API 클래스</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>str</em>) – 카카오 서비스 키</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Local.geo_coord2address">
+<span class="sig-name descname"><span class="pre">geo_coord2address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Local.geo_coord2address" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>좌표로 주소 변환하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – 경도</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – 위도</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#coord-to-address">https://developers.kakao.com/docs/latest/ko/local/dev-guide#coord-to-address</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Local.geo_coord2regioncode">
+<span class="sig-name descname"><span class="pre">geo_coord2regioncode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Local.geo_coord2regioncode" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>좌표로 행정구역정보 받기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – 경도</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – 위도</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#coord-to-district">https://developers.kakao.com/docs/latest/ko/local/dev-guide#coord-to-district</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Local.geo_transcoord">
+<span class="sig-name descname"><span class="pre">geo_transcoord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_coord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Local.geo_transcoord" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>좌표계 변환하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – 경도</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – 위도</p></li>
+<li><p><strong>output_coord</strong> (<em>str</em>) – 변환할 좌표계</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#trans-coord">https://developers.kakao.com/docs/latest/ko/local/dev-guide#trans-coord</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Local.search_address">
+<span class="sig-name descname"><span class="pre">search_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Local.search_address" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>주소 검색하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>string</em>) – 검색을 원하는 질의어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#address-coord">https://developers.kakao.com/docs/latest/ko/local/dev-guide#address-coord</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Local.search_category">
+<span class="sig-name descname"><span class="pre">search_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category_group_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Local.search_category" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카테고리로 장소 검색하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>category_group_code</strong> (<em>str</em>) – 카테고리 코드</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-category">https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-category</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Local.search_keyword">
+<span class="sig-name descname"><span class="pre">search_keyword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataframe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Local.search_keyword" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>키워드로 장소 검색하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – 검색을 원하는 질의어</p></li>
+<li><p><strong>dataframe</strong> (<em>bool</em>) – True로 설정하면 DataFrame으로 반환, False로 설정하면 dict로 반환, 기본값은 False</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – <a class="reference external" href="https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword">https://developers.kakao.com/docs/latest/ko/local/dev-guide#search-by-keyword</a> 참고</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>DataFrame으로 반환하려면 dataframe=True로 설정</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>DataFrame or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyKakao.Message">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.</span></span><span class="sig-name descname"><span class="pre">Message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redirect_uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://localhost:5000'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'talk_message'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Message" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>카카오 메시지 API 클래스</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>str</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Message.get_access_token_by_code">
+<span class="sig-name descname"><span class="pre">get_access_token_by_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Message.get_access_token_by_code" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카카오 인증코드로 액세스 토큰 발급</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>code</strong> (<em>str</em>) – 카카오 인증코드</p>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>액세스 토큰</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Message.get_access_token_by_redirected_url">
+<span class="sig-name descname"><span class="pre">get_access_token_by_redirected_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Message.get_access_token_by_redirected_url" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카카오 인증코드 발급 URL 접속 후 리다이렉트된 URL로 액세스 토큰 발급</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>url</strong> (<em>str</em>) – 카카오 인증코드 발급 URL 접속 후 리다이렉트된 URL</p>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>액세스 토큰</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Message.get_code_by_redirected_url">
+<span class="sig-name descname"><span class="pre">get_code_by_redirected_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Message.get_code_by_redirected_url" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카카오 인증코드 추출</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>url</strong> (<em>str</em>) – 카카오 인증코드 발급 URL 접속 후 리다이렉트된 URL</p>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>카카오 인증코드</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Message.get_url_for_generatiing_code">
+<span class="sig-name descname"><span class="pre">get_url_for_generatiing_code</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Message.get_url_for_generatiing_code" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>카카오 인증코드 발급 URL 생성</p>
+<dl class="field-list simple">
+<dt class="field-odd">반환</dt>
+<dd class="field-odd"><p>카카오 인증코드 발급 URL</p>
+</dd>
+<dt class="field-even">반환 형식</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Message.send_commerce">
+<span class="sig-name descname"><span class="pre">send_commerce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commerce</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Message.send_commerce" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>커머스 메시지 전송</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> (<em>dict</em>) – 커머스 정보</p></li>
+<li><p><strong>commerce</strong> (<em>dict</em>) – 상품 정보</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Message.send_feed">
+<span class="sig-name descname"><span class="pre">send_feed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Message.send_feed" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>피드 메시지 전송</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>content</strong> (<em>dict</em>) – 피드 내용</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Message.send_list">
+<span class="sig-name descname"><span class="pre">send_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header_title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_link</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contents</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Message.send_list" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>리스트 메시지 전송</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>header_title</strong> (<em>str</em>) – 리스트 제목</p></li>
+<li><p><strong>header_link</strong> (<em>dict</em>) – 리스트 링크</p></li>
+<li><p><strong>contents</strong> (<em>list</em>) – 리스트 내용</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Message.send_location">
+<span class="sig-name descname"><span class="pre">send_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address_title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Message.send_location" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>위치 메시지 전송</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>str</em>) – 주소</p></li>
+<li><p><strong>address_title</strong> (<em>str</em>) – 주소 제목</p></li>
+<li><p><strong>content</strong> (<em>dict</em>) – 위치 정보</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Message.send_text">
+<span class="sig-name descname"><span class="pre">send_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">link</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Message.send_text" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>텍스트 메시지 전송</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – 전송할 메시지 (최대 200자)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Message.set_access_token">
+<span class="sig-name descname"><span class="pre">set_access_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Message.set_access_token" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>액세스 토큰 설정</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>access_token</strong> (<em>str</em>) – 액세스 토큰</p>
 </dd>
 </dl>
 </dd></dl>
