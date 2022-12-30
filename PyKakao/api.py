@@ -19,7 +19,7 @@ class Message:
         self.scope = scope
         self.url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
 
-    def get_url_for_generatiing_code(self):
+    def get_url_for_generating_code(self):
         """
         카카오 인증코드 발급 URL 생성
 

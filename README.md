@@ -137,6 +137,9 @@ result = GPT.generate(prompt, max_tokens, temperature=0.7, top_p=0.8)
 4. 팝업 창에서 **활성화** 버튼 클릭
 5. 카카오 로그인 화면 하단의 **Redirect URI 등록** 버튼 클릭
 6. 팝업 창에서 **Redirect URI** 항목에 로컬 주소인 'https://localhost:5000' 입력 후 **저장** 버튼 클릭
+7. 내비게이션 메뉴에서 **카카오 로그인** 하위의 **동의항목**을 클릭
+8. 페이지 하단의 접근권한 이동 후 카카오톡 메시지 전송의 설정 클릭
+9. 동의 단계를 이용 중 동의로 선택하고 동의 목적 작성 후 저장 버튼 클릭
 
 
 ```python
@@ -146,7 +149,7 @@ from PyKakao import Message
 MSG = Message(service_key = "REST API 키")
 
 # 카카오 인증코드 발급 URL 생성
-auth_url = MSG.get_url_for_generatiing_code()
+auth_url = MSG.get_url_for_generating_code()
 print(auth_url)
 
 # 카카오 인증코드 발급 URL 접속 후 리다이렉트된 URL
