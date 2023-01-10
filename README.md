@@ -1,6 +1,6 @@
 <div align="center">
 
-![PNG](https://github.com/WooilJeong/PyKakao/blob/main/assets/img/logo.png?raw=true)
+![PNG](https://github.com/WooilJeong/PyKakao/blob/main/assets/img/logo.png?raw=true){: width="200"}
 
 <b>카카오 API를 사용하기 위한 오픈소스 파이썬 라이브러리</b><br>
 <b>🚀`pip install PyKakao --upgrade`</b>
