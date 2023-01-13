@@ -14,7 +14,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="색인" href="genindex.html" />
@@ -47,8 +49,24 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-PyKakao.api">PyKakao.api module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-PyKakao">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PyKakao.api">PyKakao.api module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.api.DaumSearch"><code class="docutils literal notranslate"><span class="pre">DaumSearch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.api.KakaoLocal"><code class="docutils literal notranslate"><span class="pre">KakaoLocal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.api.Karlo"><code class="docutils literal notranslate"><span class="pre">Karlo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.api.KoGPT"><code class="docutils literal notranslate"><span class="pre">KoGPT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.api.Local"><code class="docutils literal notranslate"><span class="pre">Local</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.api.Message"><code class="docutils literal notranslate"><span class="pre">Message</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PyKakao">Module contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.DaumSearch"><code class="docutils literal notranslate"><span class="pre">DaumSearch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.KakaoLocal"><code class="docutils literal notranslate"><span class="pre">KakaoLocal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.Karlo"><code class="docutils literal notranslate"><span class="pre">Karlo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.KoGPT"><code class="docutils literal notranslate"><span class="pre">KoGPT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.Local"><code class="docutils literal notranslate"><span class="pre">Local</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PyKakao.Message"><code class="docutils literal notranslate"><span class="pre">Message</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -68,9 +86,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">PyKakao</a></li>
-      <li class="breadcrumb-item active">PyKakao package</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">PyKakao</a> &raquo;</li>
+      <li>PyKakao package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/PyKakao.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -81,9 +99,9 @@
            <div itemprop="articleBody">
              
   <section id="pykakao-package">
-<h1>PyKakao package<a class="headerlink" href="#pykakao-package" title="이 표제에 대한 퍼머링크"></a></h1>
+<h1>PyKakao package<a class="headerlink" href="#pykakao-package" title="이 제목에 대한 퍼머링크"></a></h1>
 <section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="이 표제에 대한 퍼머링크"></a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="이 제목에 대한 퍼머링크"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="PyKakao.config.html">PyKakao.config package</a><ul>
@@ -96,10 +114,10 @@
 </div>
 </section>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="이 표제에 대한 퍼머링크"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="이 제목에 대한 퍼머링크"></a></h2>
 </section>
 <section id="module-PyKakao.api">
-<span id="pykakao-api-module"></span><h2>PyKakao.api module<a class="headerlink" href="#module-PyKakao.api" title="이 표제에 대한 퍼머링크"></a></h2>
+<span id="pykakao-api-module"></span><h2>PyKakao.api module<a class="headerlink" href="#module-PyKakao.api" title="이 제목에 대한 퍼머링크"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PyKakao.api.DaumSearch">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.api.</span></span><span class="sig-name descname"><span class="pre">DaumSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.DaumSearch" title="이 정의에 대한 퍼머링크"></a></dt>
@@ -337,6 +355,134 @@
 <li><p><strong>size</strong> (<em>str</em>) – 한 페이지에 보여질 문서의 개수. (최소: 1, 최대: 45, 기본값: 15)</p></li>
 <li><p><strong>sort</strong> (<em>str</em>) – 결과 정렬 순서. distance 정렬을 원할 때는 기준 좌표로 쓰일 x, y와 함께 사용 distance 또는 accuracy(기본값: accuracy)</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyKakao.api.Karlo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.api.</span></span><span class="sig-name descname"><span class="pre">Karlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Karlo" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>카카오 Karlo API 클래스</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>str</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Karlo.image_to_string">
+<span class="sig-name descname"><span class="pre">image_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Karlo.image_to_string" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>이미지를 base64 string으로 변환</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>img</strong> (<em>PIL.Image</em>) – 이미지</p>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>base64 string</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Karlo.inpaint_image">
+<span class="sig-name descname"><span class="pre">inpaint_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Karlo.inpaint_image" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>이미지 편집하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>str</em>) – 원본 이미지를 Base64 인코딩한 값
+참고:
+- 이미지 파일 규격(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement</a>)
+- 이미지 인코딩 및 디코딩(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode</a>)</p></li>
+<li><p><strong>mask</strong> (<em>str</em>) – 편집할 부분을 표시한 원본 이미지를 Base64 인코딩한 값
+편집할 부분을 검은색(Grayscale, RGB 기준 0)으로 가려서 표시
+이미지의 여러 곳 마스킹 가능
+참고:
+- 이미지 파일 규격(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement</a>)
+- 이미지 인코딩 및 디코딩(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode</a>)</p></li>
+<li><p><strong>text</strong> (<em>str</em><em>, </em><em>optional</em>) – 편집해 넣을 이미지를 묘사하는 제시어, 영문만 지원(최대: 256자)
+text 값이 설정되지 않으면 편집할 부분의 주변과 어울리도록 사물을 삭제하거나 대체함
+(기본값: “”, 빈 문자열)
+참고:
+- 활용 가이드(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/how-to-use">https://developers.kakao.com/docs/latest/ko/karlo/how-to-use</a>)</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>) – 생성할 이미지 수(기본값: 1, 최대: 8)</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>생성된 이미지의 정보</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Karlo.string_to_image">
+<span class="sig-name descname"><span class="pre">string_to_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base64_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RGBA'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Karlo.string_to_image" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>base64 string을 이미지로 변환</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base64_string</strong> (<em>str</em>) – base64 string</p></li>
+<li><p><strong>mode</strong> (<em>str</em><em>, </em><em>optional</em>) – 이미지 모드(기본값: RGBA)</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>이미지</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>PIL.Image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Karlo.text_to_image">
+<span class="sig-name descname"><span class="pre">text_to_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Karlo.text_to_image" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>이미지 생성하기 API</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – 생성할 이미지를 묘사하는 제시어, 영문만 지원(최대: 256자)
+참고:
+- 활용 가이드(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/how-to-use">https://developers.kakao.com/docs/latest/ko/karlo/how-to-use</a>)</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>) – 생성할 이미지 수(기본값: 1, 최대: 8)</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>생성된 이미지의 정보</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.api.Karlo.transform_image">
+<span class="sig-name descname"><span class="pre">transform_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.api.Karlo.transform_image" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>이미지 변환하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>str</em>) – 변환할 원본 이미지를 Base64 인코딩한 값
+참고:
+- 이미지 파일 규격(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement</a>)
+- 이미지 인코딩 및 디코딩(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode</a>)</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>) – 생성할 이미지 수(기본값: 1, 최대: 8)</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>생성된 이미지의 정보</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -674,7 +820,7 @@
 
 </section>
 <section id="module-PyKakao">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-PyKakao" title="이 표제에 대한 퍼머링크"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-PyKakao" title="이 제목에 대한 퍼머링크"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="PyKakao.DaumSearch">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.</span></span><span class="sig-name descname"><span class="pre">DaumSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.DaumSearch" title="이 정의에 대한 퍼머링크"></a></dt>
@@ -912,6 +1058,134 @@
 <li><p><strong>size</strong> (<em>str</em>) – 한 페이지에 보여질 문서의 개수. (최소: 1, 최대: 45, 기본값: 15)</p></li>
 <li><p><strong>sort</strong> (<em>str</em>) – 결과 정렬 순서. distance 정렬을 원할 때는 기준 좌표로 쓰일 x, y와 함께 사용 distance 또는 accuracy(기본값: accuracy)</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyKakao.Karlo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PyKakao.</span></span><span class="sig-name descname"><span class="pre">Karlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Karlo" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>기반 클래스: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>카카오 Karlo API 클래스</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>service_key</strong> (<em>str</em>) – 카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Karlo.image_to_string">
+<span class="sig-name descname"><span class="pre">image_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Karlo.image_to_string" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>이미지를 base64 string으로 변환</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><p><strong>img</strong> (<em>PIL.Image</em>) – 이미지</p>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>base64 string</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Karlo.inpaint_image">
+<span class="sig-name descname"><span class="pre">inpaint_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Karlo.inpaint_image" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>이미지 편집하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>str</em>) – 원본 이미지를 Base64 인코딩한 값
+참고:
+- 이미지 파일 규격(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement</a>)
+- 이미지 인코딩 및 디코딩(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode</a>)</p></li>
+<li><p><strong>mask</strong> (<em>str</em>) – 편집할 부분을 표시한 원본 이미지를 Base64 인코딩한 값
+편집할 부분을 검은색(Grayscale, RGB 기준 0)으로 가려서 표시
+이미지의 여러 곳 마스킹 가능
+참고:
+- 이미지 파일 규격(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement</a>)
+- 이미지 인코딩 및 디코딩(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode</a>)</p></li>
+<li><p><strong>text</strong> (<em>str</em><em>, </em><em>optional</em>) – 편집해 넣을 이미지를 묘사하는 제시어, 영문만 지원(최대: 256자)
+text 값이 설정되지 않으면 편집할 부분의 주변과 어울리도록 사물을 삭제하거나 대체함
+(기본값: “”, 빈 문자열)
+참고:
+- 활용 가이드(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/how-to-use">https://developers.kakao.com/docs/latest/ko/karlo/how-to-use</a>)</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>) – 생성할 이미지 수(기본값: 1, 최대: 8)</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>생성된 이미지의 정보</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Karlo.string_to_image">
+<span class="sig-name descname"><span class="pre">string_to_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base64_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'RGBA'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Karlo.string_to_image" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>base64 string을 이미지로 변환</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base64_string</strong> (<em>str</em>) – base64 string</p></li>
+<li><p><strong>mode</strong> (<em>str</em><em>, </em><em>optional</em>) – 이미지 모드(기본값: RGBA)</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>이미지</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>PIL.Image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Karlo.text_to_image">
+<span class="sig-name descname"><span class="pre">text_to_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Karlo.text_to_image" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>이미지 생성하기 API</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – 생성할 이미지를 묘사하는 제시어, 영문만 지원(최대: 256자)
+참고:
+- 활용 가이드(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/how-to-use">https://developers.kakao.com/docs/latest/ko/karlo/how-to-use</a>)</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>) – 생성할 이미지 수(기본값: 1, 최대: 8)</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>생성된 이미지의 정보</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyKakao.Karlo.transform_image">
+<span class="sig-name descname"><span class="pre">transform_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyKakao.Karlo.transform_image" title="이 정의에 대한 퍼머링크"></a></dt>
+<dd><p>이미지 변환하기</p>
+<dl class="field-list simple">
+<dt class="field-odd">매개변수</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>str</em>) – 변환할 원본 이미지를 Base64 인코딩한 값
+참고:
+- 이미지 파일 규격(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement</a>)
+- 이미지 인코딩 및 디코딩(<a class="reference external" href="https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode">https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode</a>)</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>) – 생성할 이미지 수(기본값: 1, 최대: 8)</p></li>
+</ul>
+</dd>
+<dt class="field-even">반환</dt>
+<dd class="field-even"><p>생성된 이미지의 정보</p>
+</dd>
+<dt class="field-odd">반환 형식</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>

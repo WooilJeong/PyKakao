@@ -125,6 +125,56 @@ result = GPT.generate(prompt, max_tokens, temperature=0.7, top_p=0.8)
 
 <br>
 
+### Karlo API
+
+Karlo API는 사용자가 입력한 문장과 이미지를 기반으로 새로운 이미지를 만드는 기능을 제공합니다. 생성형 인공지능(AI) Karlo는 1억 8천만 장 규모의 이미지-텍스트 학습을 통해 사용자가 묘사한 내용을 이해하고, 픽셀 단위로 완전히 새로운 이미지를 생성합니다. 또한 사용자가 원하는 콘셉트에 맞춰 창작 활동을 할 수 있도록 사물, 배경, 조명, 구도, 다양한 화풍을 지원합니다.
+
+```python
+from PyKakao import Karlo
+
+# Karlo API 인스턴스 생성
+api = Karlo(service_key)
+
+## 이미지 생성하기
+
+# 프롬프트에 사용할 제시어
+text = "A white Christmas tree in a public square by Claude Monet, Christmas season, snowy night, light tone"
+# 이미지 생성하기 REST API 호출
+img_dict = api.text_to_image(text, 1)
+# 생성된 이미지 정보
+img_str = img_dict.get("images")[0].get('image')
+# base64 string을 이미지로 변환
+img = api.string_to_image(base64_string = img_str, mode = 'RGBA')
+
+## 이미지 변환하기
+
+# 이미지 파일 불러오기
+img = Image.open('./original.png')
+# 이미지를 Base64 인코딩하기
+img_base64 = api.image_to_string(img)
+# 이미지 변환하기 REST API 호출
+response = api.transform_image(image = img_base64, batch_size=1)
+# 응답의 첫 번째 이미지 생성 결과 출력하기
+result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB')
+
+## 이미지 편집하기
+
+# 이미지 파일 불러오기
+img = Image.open('./original.png')
+mask = Image.open('./mask.png')
+# 이미지를 Base64 인코딩하기
+img_base64 = api.image_to_string(img)
+mask_base64 = api.image_to_string(mask)
+# 프롬프트에 사용할 제시어
+text = "Flowers"
+# 이미지 변환하기 REST API 호출
+response = api.inpaint_image(image = img_base64, mask = mask_base64, text = text, batch_size = 1)
+# 응답의 첫 번째 이미지 생성 결과 출력하기
+result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB')
+```
+
+<br>
+
 ### 메시지 API
 
 메시지 API는 사용자가 카카오톡 친구에게 카카오톡 메시지를 보내는 기능을 제공합니다. PyKakao의 최신 버전에서는 '나에게 보내기' 기능만 이용할 수 있습니다.

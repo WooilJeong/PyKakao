@@ -1,6 +1,9 @@
+import io
 import json
+import base64
 import requests
 import pandas as pd
+from PIL import Image
 
 
 class Message:
@@ -310,6 +313,158 @@ class KoGPT:
             print(e)
             return
         return response.json
+
+
+class Karlo:
+    """
+    카카오 Karlo API 클래스
+
+    Parameters
+    ----------
+    service_key : str
+        카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키
+    """
+
+    def __init__(self, service_key=None):
+        self.service_key = service_key
+        self.headers = {"Authorization": f"KakaoAK {self.service_key}",
+                        "Content-Type": "application/json"}
+
+    def text_to_image(self, text, batch_size=1):
+        """
+        이미지 생성하기 API
+
+        Parameters
+        ----------
+        text : str
+            생성할 이미지를 묘사하는 제시어, 영문만 지원(최대: 256자)
+            참고: 
+            - 활용 가이드(https://developers.kakao.com/docs/latest/ko/karlo/how-to-use)
+        batch_size : int, optional
+            생성할 이미지 수(기본값: 1, 최대: 8)
+
+        Returns
+        -------
+        dict
+            생성된 이미지의 정보
+        """
+        _url = "https://api.kakaobrain.com/v1/inference/karlo/t2i"
+        _json = {
+            "prompt": {
+                "text": text,
+                "batch_size": batch_size,
+            }
+        }
+        return requests.post(_url, json=_json, headers=self.headers).json()
+
+    def transform_image(self, image, batch_size=1):
+        """
+        이미지 변환하기
+
+        Parameters
+        ----------
+        image : str
+            변환할 원본 이미지를 Base64 인코딩한 값
+            참고: 
+            - 이미지 파일 규격(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement)
+            - 이미지 인코딩 및 디코딩(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode)
+        batch_size : int, optional
+            생성할 이미지 수(기본값: 1, 최대: 8)
+
+        Returns
+        -------
+        dict
+            생성된 이미지의 정보
+        """
+        _url = "https://api.kakaobrain.com/v1/inference/karlo/variations"
+        _json = {
+            "prompt": {
+                "image": image,
+                "batch_size": batch_size,
+            }
+        }
+        return requests.post(_url, json=_json, headers=self.headers).json()
+
+    def inpaint_image(self, image, mask, text="", batch_size=1):
+        """
+        이미지 편집하기
+
+        Parameters
+        ----------
+        image : str
+            원본 이미지를 Base64 인코딩한 값
+            참고:
+            - 이미지 파일 규격(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement)
+            - 이미지 인코딩 및 디코딩(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode)
+        mask : str
+            편집할 부분을 표시한 원본 이미지를 Base64 인코딩한 값
+            편집할 부분을 검은색(Grayscale, RGB 기준 0)으로 가려서 표시
+            이미지의 여러 곳 마스킹 가능
+            참고:
+            - 이미지 파일 규격(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement)
+            - 이미지 인코딩 및 디코딩(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode)  
+        text : str, optional
+            편집해 넣을 이미지를 묘사하는 제시어, 영문만 지원(최대: 256자)
+            text 값이 설정되지 않으면 편집할 부분의 주변과 어울리도록 사물을 삭제하거나 대체함
+            (기본값: "", 빈 문자열)
+            참고:
+            - 활용 가이드(https://developers.kakao.com/docs/latest/ko/karlo/how-to-use)
+        batch_size : int, optional
+            생성할 이미지 수(기본값: 1, 최대: 8)
+
+        Returns
+        -------
+        dict
+            생성된 이미지의 정보
+        """
+        _url = "https://api.kakaobrain.com/v1/inference/karlo/inpainting"
+        _json = {
+            "prompt": {
+                "image": image,
+                "mask": mask,
+                "text": text,
+                "batch_size": batch_size,
+            }
+        }
+        return requests.post(_url, json=_json, headers=self.headers).json()
+
+    def string_to_image(self, base64_string, mode='RGBA'):
+        """
+        base64 string을 이미지로 변환
+
+        Parameters
+        ----------
+        base64_string : str
+            base64 string
+        mode : str, optional
+            이미지 모드(기본값: RGBA)
+
+        Returns
+        -------
+        PIL.Image
+            이미지
+        """
+        return Image.open(io.BytesIO(base64.b64decode(str(base64_string)))).convert(mode)
+
+    def image_to_string(self, img):
+        """
+        이미지를 base64 string으로 변환
+
+        Parameters
+        ----------
+        img : PIL.Image
+            이미지
+
+        Returns
+        -------
+        str
+            base64 string
+        """
+        img_byte_arr = io.BytesIO()
+        img.save(img_byte_arr, format='PNG')
+        my_encoded_img = base64.encodebytes(
+            img_byte_arr.getvalue()).decode('ascii')
+        return my_encoded_img
 
 
 class DaumSearch:
