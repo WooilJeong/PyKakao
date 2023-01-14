@@ -150,8 +150,10 @@ img = api.string_to_image(base64_string = img_str, mode = 'RGBA')
 ```
 
 <div align="center">
-<img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat.png?raw=true" width="250" />
-<figcaption align = "center"><b>이미지 생성 결과</b></figcaption>
+    <figure>
+      <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat.png?raw=true" width="250" />
+      <figcaption align = "center"><b>이미지 생성 결과</b></figcaption>
+    </figure>
 </div>
 
 ```python
@@ -174,8 +176,10 @@ result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB
 ```
 
 <div align="center">
-<img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat_transformed.png?raw=true" width="250" />
-<figcaption align = "center"><b>이미지 변환 결과</b></figcaption>
+  <figure>
+    <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat_transformed.png?raw=true" width="250" />
+    <figcaption align = "center"><b>이미지 변환 결과</b></figcaption>
+  </figure>
 </div>
 
 
@@ -197,11 +201,14 @@ result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB
 ```
 
 <div align="center">
-<img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_mask.png?raw=true" width="250" />
-<figcaption align = "center"><b>마스킹한 이미지</b></figcaption>
-
-<img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_inpaint.png?raw=true" width="250" />
-<figcaption align = "center"><b>이미지 편집 결과</b></figcaption>
+  <figure>
+    <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_mask.png?raw=true" width="250" />
+    <figcaption align = "center"><b>마스킹한 이미지</b></figcaption>
+  </figure>
+  <figure>
+    <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_inpaint.png?raw=true" width="250" />
+    <figcaption align = "center"><b>이미지 편집 결과</b></figcaption>
+  </figure>
 </div>
 
 <br>
