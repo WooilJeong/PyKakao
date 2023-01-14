@@ -175,7 +175,7 @@ result
 ```
 
 <div align="center">
-<img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat.png?raw=true" width="250" />
+<img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat_transformed.png?raw=true" width="250" />
 </div>
 
 
