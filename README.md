@@ -147,11 +147,11 @@ img_dict = api.text_to_image(text, 1)
 img_str = img_dict.get("images")[0].get('image')
 # base64 string을 이미지로 변환
 img = api.string_to_image(base64_string = img_str, mode = 'RGBA')
-img
 ```
 
 <div align="center">
 <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat.png?raw=true" width="250" />
+<figcaption align = "center"><b>이미지 생성 결과</b></figcaption>
 </div>
 
 ```python
@@ -171,11 +171,11 @@ img_base64 = api.image_to_string(img)
 response = api.transform_image(image = img_base64, batch_size=1)
 # 응답의 첫 번째 이미지 생성 결과 출력하기
 result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB')
-result
 ```
 
 <div align="center">
 <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat_transformed.png?raw=true" width="250" />
+<figcaption align = "center"><b>이미지 변환 결과</b></figcaption>
 </div>
 
 
@@ -198,8 +198,10 @@ result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB
 
 <div align="center">
 <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_mask.png?raw=true" width="250" />
+<figcaption align = "center"><b>마스킹한 이미지</b></figcaption>
 
 <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_inpaint.png?raw=true" width="250" />
+<figcaption align = "center"><b>이미지 편집 결과</b></figcaption>
 </div>
 
 <br>
