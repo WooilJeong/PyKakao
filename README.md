@@ -11,13 +11,15 @@
 ![](https://img.shields.io/badge/API-KAKAO-yellow.svg)  
 [![오픈채팅](https://img.shields.io/badge/오픈채팅-Q&A-yellow?logo=KakaoTalk)](https://open.kakao.com/o/gh1N1kJe)
 
+</div>
+
 <br>
 
 <div align="left">
 
 ## PyKakao
 
-**PyKakao** 라이브러리를 사용하면 [Kakao Developers](https://developers.kakao.com/)에서 제공하는 여러 종류의 카카오 API를 파이썬으로 쉽게 사용할 수 있습니다. 예를 들어, [Daum 검색 API](https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide)를 이용해서 웹에서 정보를 검색할 수 있고, [메시지 API](https://developers.kakao.com/docs/latest/ko/message/rest-api)를 사용해서 카카오톡 메시지를 전송할 수 있습니다. 또한, [로컬 API](https://developers.kakao.com/docs/latest/ko/local/dev-guide)를 통해 주변 정보를 조회할 수 있고, [KoGPT API](https://developers.kakao.com/docs/latest/ko/kogpt/rest-api)를 이용해서 자연어 처리를 할 수 있습니다.
+**PyKakao** 라이브러리를 사용하면 [Kakao Developers](https://developers.kakao.com/)에서 제공하는 여러 종류의 카카오 API를 파이썬으로 쉽게 사용할 수 있습니다. 예를 들어, [Daum 검색 API](https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide)를 이용해서 웹에서 정보를 검색할 수 있고, [메시지 API](https://developers.kakao.com/docs/latest/ko/message/rest-api)를 사용해서 카카오톡 메시지를 전송할 수 있습니다. 또한, [로컬 API](https://developers.kakao.com/docs/latest/ko/local/dev-guide)를 통해 주변 정보를 조회할 수 있고, [KoGPT API](https://developers.kakao.com/docs/latest/ko/kogpt/rest-api)와 [Karlo API](https://developers.kakao.com/docs/latest/ko/karlo/rest-api)를 이용해 자연어 처리를 하거나 생성형 인공지능으로 새로운 이미지를 만들어 볼 수도 있습니다.
 
 
 <br>
@@ -138,13 +140,26 @@ api = Karlo(service_key)
 ## 이미지 생성하기
 
 # 프롬프트에 사용할 제시어
-text = "A white Christmas tree in a public square by Claude Monet, Christmas season, snowy night, light tone"
+text = "Cute magical flyng cat, soft golden fur, fantasy art drawn by Pixar concept artist, Toy Story main character, clear and bright eyes, sharp nose"
 # 이미지 생성하기 REST API 호출
 img_dict = api.text_to_image(text, 1)
 # 생성된 이미지 정보
 img_str = img_dict.get("images")[0].get('image')
 # base64 string을 이미지로 변환
 img = api.string_to_image(base64_string = img_str, mode = 'RGBA')
+img
+```
+
+<div align="center">
+<img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat.png?raw=true" width="250" />
+</div>
+
+```python
+from PyKakao import Karlo
+from PIL import Image
+
+# Karlo API 인스턴스 생성
+api = Karlo(service_key)
 
 ## 이미지 변환하기
 
@@ -156,7 +171,15 @@ img_base64 = api.image_to_string(img)
 response = api.transform_image(image = img_base64, batch_size=1)
 # 응답의 첫 번째 이미지 생성 결과 출력하기
 result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB')
+result
+```
 
+<div align="center">
+<img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat.png?raw=true" width="250" />
+</div>
+
+
+```python
 ## 이미지 편집하기
 
 # 이미지 파일 불러오기
@@ -166,12 +189,18 @@ mask = Image.open('./mask.png')
 img_base64 = api.image_to_string(img)
 mask_base64 = api.image_to_string(mask)
 # 프롬프트에 사용할 제시어
-text = "Flowers"
+text = "whatever"
 # 이미지 변환하기 REST API 호출
 response = api.inpaint_image(image = img_base64, mask = mask_base64, text = text, batch_size = 1)
 # 응답의 첫 번째 이미지 생성 결과 출력하기
 result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB')
 ```
+
+<div align="center">
+<img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_mask.png?raw=true" width="250" />
+
+<img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_inpaint.png?raw=true" width="250" />
+</div>
 
 <br>
 
