@@ -176,12 +176,12 @@ result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB
 ```
 
 <div align="center">
-  <figure>
-    <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat_transformed.png?raw=true" width="250" /><br>
-    <figcaption align = "center"><b>이미지 변환 결과</b></figcaption>
-  </figure>
-</div>
 
+원본 이미지 | 변환된 이미지 
+:---------:|:-----------------:
+<img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat.png?raw=true" width="250" /> | <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat_transformed.png?raw=true" width="250" />
+
+</div>
 
 ```python
 ## 이미지 편집하기
@@ -202,7 +202,7 @@ result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB
 
 <div align="center">
 
-원본 이미지 | 마스킹한 이미지 | 이미지 편집 결과
+원본 이미지 | 마스킹한 이미지 | 편집된 이미지
 :---------:|:-----------------:|:---------------------:
 <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat.png?raw=true" width="250" /> | <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_mask.png?raw=true" width="250" /> | <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_inpaint.png?raw=true" width="250" />
 
