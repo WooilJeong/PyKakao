@@ -8,7 +8,8 @@
 [![PyPI Latest Release](https://img.shields.io/pypi/v/pykakao.svg)](https://pypi.org/project/pykakao/)
 [![License](https://img.shields.io/pypi/l/ansicolortags.svg)](https://img.shields.io/pypi/l/ansicolortags.svg)
 [![Python](https://img.shields.io/badge/Official-Docs-tomato)](https://wooiljeong.github.io/PyKakao/)
-![](https://img.shields.io/badge/API-KAKAO-yellow.svg)  
+![](https://img.shields.io/badge/API-KAKAO-yellow.svg)
+[![Downloads](https://static.pepy.tech/badge/pykakao)](https://pepy.tech/project/pykakao)  
 [![오픈채팅](https://img.shields.io/badge/오픈채팅-Q&A-yellow?logo=KakaoTalk)](https://open.kakao.com/o/gh1N1kJe)
 
 </div>
@@ -305,6 +306,6 @@ MSG.send_text(text=text, link={}, button_title=button_title)
 
 <div align=center>
 
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FWooilJeong%2FPyKakao&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+<!-- [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FWooilJeong%2FPyKakao&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) -->
 
 </div>
