@@ -115,7 +115,7 @@ df =  LOCAL.search_category("MT1", x=127.110871319215, y=37.3885490672089, radiu
 KoGPT API는 다양한 한국어 과제를 수행할 수 있는 기능을 제공합니다. 카카오브레인의 KoGPT는 방대한 데이터로 훈련된 [GPT-3](https://ko.wikipedia.org/wiki/GPT-3) 기반의 인공지능(Artifical Intelligence, AI) 한국어 언어 모델입니다.
 
 ```python
-from PyKako import KoGPT
+from PyKakao import KoGPT
 
 # KoGPT API 인스턴스 생성
 GPT = KoGPT(service_key = "REST API 키")
