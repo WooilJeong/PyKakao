@@ -281,6 +281,7 @@ MSG.send_text(text=text, link={}, button_title=button_title)
 ## 참고
 
 - **튜토리얼**  
+  - [ChatGPT API Python 사용법 (feat.DALL-E, Karlo)](https://wooiljeong.github.io/python/chatgpt-api/)
   - [PyKakao - Python으로 다음 검색 API 사용하기](https://wooiljeong.github.io/python/pykakao-daum/)
   - [PyKakao - Python으로 카카오 KoGPT API 사용하기](https://wooiljeong.github.io/python/pykakao-kogpt/)
   - [PyKakao - Python으로 카카오 Karlo API 사용하기](https://wooiljeong.github.io/python/pykakao-karlo/)
