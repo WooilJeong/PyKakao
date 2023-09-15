@@ -327,107 +327,220 @@ class Karlo:
 
     def __init__(self, service_key=None):
         self.service_key = service_key
-        self.headers = {"Authorization": f"KakaoAK {self.service_key}",
-                        "Content-Type": "application/json"}
+        self.headers = {
+            "Authorization": f"KakaoAK {self.service_key}",
+            "Content-Type": "application/json",
+        }
 
-    def text_to_image(self, text, batch_size=1):
+    def text_to_image(
+        self, 
+        prompt, 
+        negative_prompt=None, 
+        width=512, 
+        height=512, 
+        upscale=None, 
+        scale=2, 
+        image_format="webp", 
+        image_quality=70, 
+        samples=1, 
+        return_type="url", 
+        prior_num_inference_steps=25, 
+        prior_guidance_scale=5.0, 
+        num_inference_steps=50, 
+        guidance_scale=5.0, 
+        scheduler="decoder_ddim_v_prediction", 
+        seed=None, 
+        nsfw_checker=False
+    ):
         """
         이미지 생성하기 API
 
         Parameters
         ----------
-        text : str
-            생성할 이미지를 묘사하는 제시어, 영문만 지원(최대: 256자)
-            참고: 
-            - 활용 가이드(https://developers.kakao.com/docs/latest/ko/karlo/how-to-use)
-        batch_size : int, optional
-            생성할 이미지 수(기본값: 1, 최대: 8)
+        prompt : str
+            이미지를 묘사하는 제시어, 영문만 지원 (최대: 256자)
+        ... (다른 파라미터들)
 
         Returns
         -------
         dict
             생성된 이미지의 정보
         """
-        _url = "https://api.kakaobrain.com/v1/inference/karlo/t2i"
+        _url = "https://api.kakaobrain.com/v2/inference/karlo/t2i"
         _json = {
-            "prompt": {
-                "text": text,
-                "batch_size": batch_size,
-            }
+            "prompt": prompt,
+            "negative_prompt": negative_prompt,
+            "width": width,
+            "height": height,
+            "upscale": upscale,
+            "scale": scale,
+            "image_format": image_format,
+            "image_quality": image_quality,
+            "samples": samples,
+            "return_type": return_type,
+            "prior_num_inference_steps": prior_num_inference_steps,
+            "prior_guidance_scale": prior_guidance_scale,
+            "num_inference_steps": num_inference_steps,
+            "guidance_scale": guidance_scale,
+            "scheduler": scheduler,
+            "seed": seed,
+            "nsfw_checker": nsfw_checker
         }
+        _json = {k: v for k, v in _json.items() if v is not None}
+        return requests.post(_url, json=_json, headers=self.headers).json()
+    
+    def upscale_image(
+        self, 
+        images, 
+        scale=2, 
+        image_format="webp", 
+        image_quality=70, 
+        return_type="url"
+    ):
+        """
+        이미지 확대하기 API
+
+        Parameters
+        ----------
+        images : list of str
+            확대할 이미지 파일을 Base64 인코딩한 값들의 리스트
+        scale : int, optional
+            확대 배율, 2 또는 4 중 하나 (기본값: 2)
+        image_format : str, optional
+            이미지 파일 형식, "webp", "jpeg", "png" 중 하나 (기본값: "webp")
+        image_quality : int, optional
+            이미지 저장 품질 (기본값: 70, 최소: 1, 최대: 100)
+        return_type : str, optional
+            응답의 이미지 파일 반환 형식, "base64_string" 또는 "url" 중 하나 (기본값: "url")
+
+        Returns
+        -------
+        dict
+            확대된 이미지의 정보
+        """
+        _url = "https://api.kakaobrain.com/v2/inference/karlo/upscale"
+        _json = {
+            "images": images,
+            "scale": scale,
+            "image_format": image_format,
+            "image_quality": image_quality,
+            "return_type": return_type
+        }
+        _json = {k: v for k, v in _json.items() if v is not None}
         return requests.post(_url, json=_json, headers=self.headers).json()
 
-    def transform_image(self, image, batch_size=1):
+    def transform_image(
+        self, 
+        image,
+        prompt=None,
+        negative_prompt=None,
+        width=512,
+        height=512,
+        upscale=None,
+        scale=2,
+        image_format="webp",
+        image_quality=70,
+        samples=1,
+        return_type="url",
+        num_inference_steps=50,
+        guidance_scale=5.0,
+        scheduler="decoder_ddim_v_prediction",
+        seed=None,
+        nsfw_checker=False
+    ):
         """
-        이미지 변환하기
+        이미지 변환하기 API
 
         Parameters
         ----------
         image : str
-            변환할 원본 이미지를 Base64 인코딩한 값
-            참고: 
-            - 이미지 파일 규격(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement)
-            - 이미지 인코딩 및 디코딩(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode)
-        batch_size : int, optional
-            생성할 이미지 수(기본값: 1, 최대: 8)
+            원본 이미지 파일을 Base64 인코딩한 값
+        ... (다른 파라미터들)
 
         Returns
         -------
         dict
             생성된 이미지의 정보
         """
-        _url = "https://api.kakaobrain.com/v1/inference/karlo/variations"
+        _url = "https://api.kakaobrain.com/v2/inference/karlo/variations"
         _json = {
-            "prompt": {
-                "image": image,
-                "batch_size": batch_size,
-            }
+            "image": image,
+            "prompt": prompt,
+            "negative_prompt": negative_prompt,
+            "width": width,
+            "height": height,
+            "upscale": upscale,
+            "scale": scale,
+            "image_format": image_format,
+            "image_quality": image_quality,
+            "samples": samples,
+            "return_type": return_type,
+            "num_inference_steps": num_inference_steps,
+            "guidance_scale": guidance_scale,
+            "scheduler": scheduler,
+            "seed": seed,
+            "nsfw_checker": nsfw_checker
         }
+        _json = {k: v for k, v in _json.items() if v is not None}
         return requests.post(_url, json=_json, headers=self.headers).json()
 
-    def inpaint_image(self, image, mask, text="", batch_size=1):
+    def check_nsfw(self, images):
         """
-        이미지 편집하기
+        NSFW 검사하기 API
 
         Parameters
         ----------
-        image : str
-            원본 이미지를 Base64 인코딩한 값
-            참고:
-            - 이미지 파일 규격(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement)
-            - 이미지 인코딩 및 디코딩(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode)
-        mask : str
-            편집할 부분을 표시한 원본 이미지를 Base64 인코딩한 값
-            편집할 부분을 검은색(Grayscale, RGB 기준 0)으로 가려서 표시
-            이미지의 여러 곳 마스킹 가능
-            참고:
-            - 이미지 파일 규격(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement)
-            - 이미지 인코딩 및 디코딩(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode)  
-        text : str, optional
-            편집해 넣을 이미지를 묘사하는 제시어, 영문만 지원(최대: 256자)
-            text 값이 설정되지 않으면 편집할 부분의 주변과 어울리도록 사물을 삭제하거나 대체함
-            (기본값: "", 빈 문자열)
-            참고:
-            - 활용 가이드(https://developers.kakao.com/docs/latest/ko/karlo/how-to-use)
-        batch_size : int, optional
-            생성할 이미지 수(기본값: 1, 최대: 8)
+        images : list of str
+            검사 대상 이미지 파일을 Base64 인코딩한 값들의 리스트
 
         Returns
         -------
         dict
-            생성된 이미지의 정보
+            NSFW 검사 결과
         """
-        _url = "https://api.kakaobrain.com/v1/inference/karlo/inpainting"
+        _url = "https://api.kakaobrain.com/v2/inference/karlo/nsfw_checker"
         _json = {
-            "prompt": {
-                "image": image,
-                "mask": mask,
-                "text": text,
-                "batch_size": batch_size,
-            }
+            "images": images
         }
         return requests.post(_url, json=_json, headers=self.headers).json()
 
+    def get_first_image_from_response(self, response):
+        """
+        응답에서 첫 번째 이미지를 가져와서 Image 객체로 반환하는 함수
+
+        Parameters
+        ----------
+        response : dict
+            t2i API의 응답 결과
+
+        Returns
+        -------
+        Image
+            첫 번째 이미지에 대한 Image 객체
+        """
+        try:
+            images = response.get('images')
+            if not images:
+                print("Error: 'images' key not found in the response.")
+                return None
+
+            first_image = images[0]
+            if isinstance(first_image, dict) and 'image' in first_image:
+                image_url = first_image.get('image')
+            else:
+                image_url = first_image
+
+            return Image.open(urllib.request.urlopen(image_url))
+
+        except IndexError:
+            print("Error: 'images' list is empty.")
+        except TypeError:
+            print("Error: Unexpected type for 'images' or its content.")
+        except Exception as e:
+            print(f"Unexpected error occurred: {e}")
+
+        return None
+    
     def string_to_image(self, base64_string, mode='RGBA'):
         """
         base64 string을 이미지로 변환
@@ -1162,3 +1275,157 @@ class KakaoLocal:
         document = json.loads(res.text)
 
         return document
+
+
+class _Karlo:
+    """
+    (Deprecated)
+    카카오 Karlo API 클래스
+
+    Parameters
+    ----------
+    service_key : str
+        카카오 개발자 센터에서 발급받은 애플리케이션의 REST API 키
+    """
+
+    def __init__(self, service_key=None):
+        self.service_key = service_key
+        self.headers = {"Authorization": f"KakaoAK {self.service_key}",
+                        "Content-Type": "application/json"}
+
+    def text_to_image(self, text, batch_size=1):
+        """
+        이미지 생성하기 API
+
+        Parameters
+        ----------
+        text : str
+            생성할 이미지를 묘사하는 제시어, 영문만 지원(최대: 256자)
+            참고: 
+            - 활용 가이드(https://developers.kakao.com/docs/latest/ko/karlo/how-to-use)
+        batch_size : int, optional
+            생성할 이미지 수(기본값: 1, 최대: 8)
+
+        Returns
+        -------
+        dict
+            생성된 이미지의 정보
+        """
+        _url = "https://api.kakaobrain.com/v1/inference/karlo/t2i"
+        _json = {
+            "prompt": {
+                "text": text,
+                "batch_size": batch_size,
+            }
+        }
+        return requests.post(_url, json=_json, headers=self.headers).json()
+
+    def transform_image(self, image, batch_size=1):
+        """
+        이미지 변환하기
+
+        Parameters
+        ----------
+        image : str
+            변환할 원본 이미지를 Base64 인코딩한 값
+            참고: 
+            - 이미지 파일 규격(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement)
+            - 이미지 인코딩 및 디코딩(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode)
+        batch_size : int, optional
+            생성할 이미지 수(기본값: 1, 최대: 8)
+
+        Returns
+        -------
+        dict
+            생성된 이미지의 정보
+        """
+        _url = "https://api.kakaobrain.com/v1/inference/karlo/variations"
+        _json = {
+            "prompt": {
+                "image": image,
+                "batch_size": batch_size,
+            }
+        }
+        return requests.post(_url, json=_json, headers=self.headers).json()
+
+    def inpaint_image(self, image, mask, text="", batch_size=1):
+        """
+        이미지 편집하기
+
+        Parameters
+        ----------
+        image : str
+            원본 이미지를 Base64 인코딩한 값
+            참고:
+            - 이미지 파일 규격(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement)
+            - 이미지 인코딩 및 디코딩(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode)
+        mask : str
+            편집할 부분을 표시한 원본 이미지를 Base64 인코딩한 값
+            편집할 부분을 검은색(Grayscale, RGB 기준 0)으로 가려서 표시
+            이미지의 여러 곳 마스킹 가능
+            참고:
+            - 이미지 파일 규격(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-image-requirement)
+            - 이미지 인코딩 및 디코딩(https://developers.kakao.com/docs/latest/ko/karlo/rest-api#before-you-begin-encode-and-decode)  
+        text : str, optional
+            편집해 넣을 이미지를 묘사하는 제시어, 영문만 지원(최대: 256자)
+            text 값이 설정되지 않으면 편집할 부분의 주변과 어울리도록 사물을 삭제하거나 대체함
+            (기본값: "", 빈 문자열)
+            참고:
+            - 활용 가이드(https://developers.kakao.com/docs/latest/ko/karlo/how-to-use)
+        batch_size : int, optional
+            생성할 이미지 수(기본값: 1, 최대: 8)
+
+        Returns
+        -------
+        dict
+            생성된 이미지의 정보
+        """
+        _url = "https://api.kakaobrain.com/v1/inference/karlo/inpainting"
+        _json = {
+            "prompt": {
+                "image": image,
+                "mask": mask,
+                "text": text,
+                "batch_size": batch_size,
+            }
+        }
+        return requests.post(_url, json=_json, headers=self.headers).json()
+
+    def string_to_image(self, base64_string, mode='RGBA'):
+        """
+        base64 string을 이미지로 변환
+
+        Parameters
+        ----------
+        base64_string : str
+            base64 string
+        mode : str, optional
+            이미지 모드(기본값: RGBA)
+
+        Returns
+        -------
+        PIL.Image
+            이미지
+        """
+        return Image.open(io.BytesIO(base64.b64decode(str(base64_string)))).convert(mode)
+
+    def image_to_string(self, img):
+        """
+        이미지를 base64 string으로 변환
+
+        Parameters
+        ----------
+        img : PIL.Image
+            이미지
+
+        Returns
+        -------
+        str
+            base64 string
+        """
+        img_byte_arr = io.BytesIO()
+        img.save(img_byte_arr, format='PNG')
+        my_encoded_img = base64.encodebytes(
+            img_byte_arr.getvalue()).decode('ascii')
+        return my_encoded_img
+
