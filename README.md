@@ -136,94 +136,98 @@ Karlo API는 사용자가 입력한 문장과 이미지를 기반으로 새로�
 
 ```python
 from PyKakao import Karlo
-
-# Karlo API 인스턴스 생성
 api = Karlo(service_key)
 
 # 프롬프트에 사용할 제시어
-text = "Cute magical flyng cat, soft golden fur, fantasy art drawn by Pixar concept artist, Toy Story main character, clear and bright eyes, sharp nose"
+prompt = "A cat with white fur"
+negative_prompt = "sleeping cat, dog, human, ugly face, cropped"
 
 # 이미지 생성하기 REST API 호출
-img_dict = api.text_to_image(text, 1)
+response = api.text_to_image(prompt, negative_prompt)
 
-# 생성된 이미지 정보
-img_str = img_dict.get("images")[0].get('image')
-
-# base64 string을 이미지로 변환
-img = api.string_to_image(base64_string = img_str, mode = 'RGBA')
+# 응답의 첫 번째 이미지 생성 결과 출력하기
+img = api.get_first_image_from_response(response)
 ```
 
-<div align="center">
+<!-- <div align="center">
     <figure>
       <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat.png?raw=true" width="250" /><br>
       <figcaption align = "center"><b>이미지 생성 결과</b></figcaption>
     </figure>
-</div>
+</div> -->
+
+- 이미지 확대하기
+
+```python
+from PyKakao import Karlo
+api = Karlo(service_key)
+
+# 이미지 파일 불러오기
+img = Image.open("my_image.png")
+
+# 이미지 확대하기를 위한 이미지 (Base64 인코딩된 값)
+encoded_image = api.image_to_string(img)
+
+# 이미지 확대하기 REST API 호출
+upscale_response = api.upscale_image([encoded_image])
+
+# 응답의 첫 번째 이미지 확대 결과 출력하기
+upscaled_img = api.get_first_image_from_response(upscale_response)
+```
+
 
 - 이미지 변환하기
 
 ```python
 from PyKakao import Karlo
-from PIL import Image
-
-# Karlo API 인스턴스 생성
 api = Karlo(service_key)
 
 # 이미지 파일 불러오기
-img = Image.open('./original.png')
+img = Image.open("my_image.png")
 
-# 이미지를 Base64 인코딩하기
-img_base64 = api.image_to_string(img)
+# 이미지 변환하기를 위한 이미지 (Base64 인코딩된 값)
+encoded_image_for_transformation = api.image_to_string(img)
 
 # 이미지 변환하기 REST API 호출
-response = api.transform_image(image = img_base64, batch_size=1)
+transform_response = api.transform_image(encoded_image_for_transformation)
 
-# 응답의 첫 번째 이미지 생성 결과 출력하기
-result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB')
+# 응답의 첫 번째 이미지 변환 결과 출력하기
+transformed_img = api.get_first_image_from_response(transform_response)
 ```
 
-<div align="center">
+<!-- <div align="center">
 
 원본 이미지 | 변환된 이미지 
 :---------:|:-----------------:
 <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat.png?raw=true" width="250" /> | <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat_transformed.png?raw=true" width="250" />
 
-</div>
+</div> -->
 
-- 이미지 편집하기
+- NSFW 검사하기
 
 ```python
 from PyKakao import Karlo
-from PIL import Image
-
-# Karlo API 인스턴스 생성
-api = Karlo(service_key)
 
 # 이미지 파일 불러오기
-img = Image.open('./original.png')
-mask = Image.open('./mask.png')
+img = Image.open("my_image.png")
 
-# 이미지를 Base64 인코딩하기
+# 이미지 파일을 이미지 데이터로 변환
 img_base64 = api.image_to_string(img)
-mask_base64 = api.image_to_string(mask)
 
-# 프롬프트에 사용할 제시어
-text = "whatever"
+# NSFW 검사하기를 위한 이미지들 (Base64 인코딩된 값들의 리스트)
+encoded_images_for_nsfw_check = [img_base64]
 
-# 이미지 변환하기 REST API 호출
-response = api.inpaint_image(image = img_base64, mask = mask_base64, text = text, batch_size = 1)
-
-# 응답의 첫 번째 이미지 생성 결과 출력하기
-result = api.string_to_image(response.get("images")[0].get("image"), mode = 'RGB')
+# NSFW 검사하기 REST API 호출
+nsfw_response = api.check_nsfw(encoded_images_for_nsfw_check)
 ```
 
-<div align="center">
+<!-- <div align="center">
 
 원본 이미지 | 마스킹한 이미지 | 편집된 이미지
 :---------:|:-----------------:|:---------------------:
 <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_cat.png?raw=true" width="250" /> | <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_mask.png?raw=true" width="250" /> | <img src="https://github.com/WooilJeong/PyKakao/blob/main/assets/img/example_karlo_inpaint.png?raw=true" width="250" />
 
-</div>
+</div> -->
 
 <br>
 
