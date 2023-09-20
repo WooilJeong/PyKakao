@@ -1,6 +1,7 @@
 import io
 import json
 import base64
+import urllib
 import requests
 import pandas as pd
 from PIL import Image
