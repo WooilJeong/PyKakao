@@ -21,7 +21,8 @@ class Message:
         self.service_key = service_key
         self.redirect_uri = redirect_uri
         self.scope = scope
-        self.url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
+        self.url_message_me = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
+        self.url_message_friend = "https://kapi.kakao.com/v1/api/talk/friends/message/default/send"
 
     def get_url_for_generating_code(self):
         """
@@ -110,164 +111,69 @@ class Message:
         access_token : str
             액세스 토큰
         """
-        self.headers = {"Authorization": f"Bearer {access_token}"}
+        self.headers = {
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/x-www-form-urlencoded",
+            }
         print("액세스 토큰 설정 완료")
 
-    def send_text(self, text, link, **kwargs):
-        """
-        텍스트 메시지 전송
+    def send_message_to_me(self, message_type, **kwargs):
+        """나에게 보내기 API
 
         Parameters
         ----------
-        text : str
-            전송할 메시지 (최대 200자)
+        message_type : str
+            메시지 유형 ('text', 'feed', 'list', 'location', 'commerce' 등)
+        kwargs : dict
+            메시지 유형에 따른 추가 파라미터
         """
-        params = {
-            "object_type": "text",
-            "text": text,
-            "link": link,
-        }
+        params = {"object_type": message_type}
         params.update(kwargs)
         data = {"template_object": json.dumps(params)}
         try:
-            r = requests.post(self.url, headers=self.headers, data=data)
+            r = requests.post(self.url_message_me, headers=self.headers, data=data)
             r.raise_for_status()
         except Exception as e:
-            print(f"메시지 전송 실패")
+            print("메시지 전송 실패")
             print(e)
             return
         if r.json()['result_code'] == 0:
             print("메시지 전송 성공")
         else:
-            print(f"메시지 전송 실패")
+            print("메시지 전송 실패")
             print(r.json())
 
-    def send_feed(self, content, **kwargs):
-        """
-        피드 메시지 전송
+    def send_message_to_friend(self, message_type, receiver_uuids, **kwargs):
+        """친구에게 보내기 API
 
         Parameters
         ----------
-        content : dict
-            피드 내용
+        message_type : str
+            메시지 유형 ('text', 'feed', 'list', 'location', 'commerce' 등)
+        receiver_uuids : list
+            받는 사람의 고유 ID 목록
+        kwargs : dict
+            메시지 유형에 따른 추가 파라미터
         """
-        params = {
-            "object_type": "feed",
-            "content": content,
-        }
+        params = {"object_type": message_type}
         params.update(kwargs)
-        data = {"template_object": json.dumps(params)}
+        data = {
+            "receiver_uuids": json.dumps(receiver_uuids),
+            "template_object": json.dumps(params),
+            }
         try:
-            r = requests.post(self.url, headers=self.headers, data=data)
+            r = requests.post(self.url_message_friend, headers=self.headers, data=data)
             r.raise_for_status()
+            response = r.json()
+            # 성공한 UUID 목록 확인
+            if "successful_receiver_uuids" in response:
+                print("메시지 전송 성공:", response["successful_receiver_uuids"])
+            # 실패 정보 확인
+            if "failure_info" in response:
+                print("일부 메시지 전송 실패:", response["failure_info"])
         except Exception as e:
-            print(f"메시지 전송 실패")
+            print("메시지 전송 실패")
             print(e)
-            return
-        if r.json()['result_code'] == 0:
-            print("메시지 전송 성공")
-        else:
-            print(f"메시지 전송 실패")
-            print(r.json())
-
-    def send_list(self, header_title, header_link, contents, **kwargs):
-        """
-        리스트 메시지 전송
-
-        Parameters
-        ----------
-        header_title : str
-            리스트 제목
-        header_link : dict
-            리스트 링크
-        contents : list
-            리스트 내용
-        """
-        params = {
-            "object_type": "list",
-            "header_title": header_title,
-            "header_link": header_link,
-            "contents": contents,
-        }
-        params.update(kwargs)
-        data = {"template_object": json.dumps(params)}
-        try:
-            r = requests.post(self.url, headers=self.headers, data=data)
-            r.raise_for_status()
-        except Exception as e:
-            print(f"메시지 전송 실패")
-            print(e)
-            return
-        if r.json()['result_code'] == 0:
-            print("메시지 전송 성공")
-        else:
-            print(f"메시지 전송 실패")
-            print(r.json())
-
-    def send_location(self, address, address_title, content, **kwargs):
-        """
-        위치 메시지 전송
-
-        Parameters
-        ----------
-        address : str
-            주소
-        address_title : str
-            주소 제목
-        content : dict
-            위치 정보
-        """
-        params = {
-            "object_type": "location",
-            "address": address,
-            "address_title": address_title,
-            "content": content,
-        }
-        params.update(kwargs)
-        data = {"template_object": json.dumps(params)}
-        try:
-            r = requests.post(self.url, headers=self.headers, data=data)
-            r.raise_for_status()
-        except Exception as e:
-            print(f"메시지 전송 실패")
-            print(e)
-            return
-        if r.json()['result_code'] == 0:
-            print("메시지 전송 성공")
-        else:
-            print(f"메시지 전송 실패")
-            print(r.json())
-
-    def send_commerce(self, content, commerce, **kwargs):
-        """
-        커머스 메시지 전송
-
-        Parameters
-        ----------
-        content : dict
-            커머스 정보
-        commerce : dict
-            상품 정보
-        """
-        params = {
-            "object_type": "commerce",
-            "content": content,
-            "commerce": commerce,
-        }
-        params.update(kwargs)
-        data = {"template_object": json.dumps(params)}
-        try:
-            r = requests.post(self.url, headers=self.headers, data=data)
-            r.raise_for_status()
-        except Exception as e:
-            print(f"메시지 전송 실패")
-            print(e)
-            return
-        if r.json()['result_code'] == 0:
-            print("메시지 전송 성공")
-        else:
-            print(f"메시지 전송 실패")
-            print(r.json())
 
 
 class KoGPT:

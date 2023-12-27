@@ -233,7 +233,7 @@ nsfw_response = api.check_nsfw(encoded_images_for_nsfw_check)
 
 ### 메시지 API
 
-메시지 API는 사용자가 카카오톡 친구에게 카카오톡 메시지를 보내는 기능을 제공합니다. PyKakao의 최신 버전에서는 '나에게 보내기' 기능만 이용할 수 있습니다.
+메시지 API는 사용자가 카카오톡 친구에게 카카오톡 메시지를 보내는 기능을 제공합니다. PyKakao의 최신 버전에서는 '나에게 보내기'와 '친구에게 보내기' 기능을 이용할 수 있습니다.
 
 메시지 API의 경우 아래 '카카오 로그인 관련 설정하기'와 같이 설정 후 정상적으로 이용할 수 있습니다.
 
@@ -269,15 +269,40 @@ access_token = MSG.get_access_token_by_redirected_url(url)
 # 액세스 토큰 설정
 MSG.set_access_token(access_token)
 
-# 텍스트 메시지 전송
-text = "텍스트 영역입니다. 최대 200자 표시 가능합니다."
+# 1. 나에게 보내기 API - 텍스트 메시지 보내기 예시
+message_type = "text" # 메시지 유형 - 텍스트
+text = "텍스트 영역입니다. 최대 200자 표시 가능합니다." # 전송할 텍스트 메시지 내용
 link = {
-            "web_url": "https://developers.kakao.com",
-            "mobile_web_url": "https://developers.kakao.com"
-        }
-button_title = "바로 확인"
+  "web_url": "https://developers.kakao.com",
+  "mobile_web_url": "https://developers.kakao.com",
+}
+button_title = "바로 확인" # 버튼 타이틀
 
-MSG.send_text(text=text, link={}, button_title=button_title)
+MSG.send_message_to_me(
+    message_type=message_type, 
+    text=text,
+    link=link,
+    button_title=button_title,
+)
+
+# 2. 친구에게 보내기 API - 텍스트 메시지 보내기 예시 (친구의 UUID 필요)
+message_type = "text" # 메시지 유형 - 텍스트
+receiver_uuids = [] # 메시지 수신자 UUID 목록
+text = "텍스트 영역입니다. 최대 200자 표시 가능합니다." # 전송할 텍스트 메시지 내용
+link = {
+  "web_url": "https://developers.kakao.com",
+  "mobile_web_url": "https://developers.kakao.com",
+}
+button_title = "바로 확인" # 버튼 타이틀
+
+MSG.send_message_to_friend(
+    message_type=message_type, 
+    receiver_uuids=receiver_uuids,
+    text=text,
+    link=link,
+    button_title=button_title,
+)
+
 ```
 
 <br>
